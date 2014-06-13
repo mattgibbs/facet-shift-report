@@ -1,0 +1,30 @@
+<!doctype html>
+<title>WILL IT WORK?!</title>
+
+<div>
+	<table class="reportTable" cellspacing="0" cellpadding="0">
+	{% for entry in entries %}
+	Group: {{ entry.usergroup }}
+	Shift: {{ entry.shift }}
+	Personnel: {{ entry.personnel }}
+	Goals: <pre>{{ entry.goals }}</pre>
+	Progress: <pre>{{ entry.progress }}</pre>
+	Problems: {{ entry.problems }}
+	Next Shift: {{ entry.next_shift }}
+	Brief Summary: {{ entry.brief_summary }}
+	Other: {{ entry.other }}
+	Useful Beam Time: {{ entry.useful_beam_time }}
+	Unscheduled Accelerator Down Time: {{ entry.unscheduled_accelerator_down }} Reason: {{ entry.other_down_reason }}
+	Accelerator Physicist Availability: {{ entry.accelerator_physicist_availability }}
+	{% endfor %}
+	</table>
+</div><
+<div>
+	<!-- Summary Division -->
+</div>
+<div>
+	<!-- Time accounting Division -->
+</div>
+<div>
+	<!-- Emittance Division -->
+</div>

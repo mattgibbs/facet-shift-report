@@ -1,0 +1,68 @@
+<!doctype html>
+<title>User Shift Report Form</title>
+<!-- TODO: Disable auto submit when pressing enter in text inputs -->
+<!-- TODO: Add in submission date/time stuff-->
+<form action='/shift_summary_form/' method='post' target="_top">
+	<fieldset>
+		<legend>Program</legend>
+		<label for="usergroup">Main Experiment*</label><br>
+		<input type="text" name="usergroup" required id="usergroup" placeholder="e.g. E210"><br>
+		<label for="shift">Shift</label><br>
+		<input type="text" name="shift" id="shift" placeholder="e.g. Swing"><br>
+		<label for="personnel">Shift Leader/Shift Personnel</label><br>
+		<input type="textarea" name="personnel" id="personnel"><br>
+	</fieldset>
+	<fieldset>
+		<legend>Summaries</legend>
+		<label for="goals">Goals</label><br>
+		<textarea type="text" name="goals" id="goals" cols=60 rows=15></textarea><br>
+
+		<label for="progress">Progress</label><br>
+		<textarea type="text" name="progress" id="progress" cols=60 rows=15></textarea><br>
+	
+		<label for="problems">Problems</label><br>
+		<textarea type="text" name="problems" id="problems" cols=60 rows=15></textarea><br>
+	
+		<label for="next_shift">To Do On Next Shift</label><br>
+		<textarea type="text" name="next_shift" id="next_shift" cols=60 rows=15></textarea><br>
+	
+		<label for="brief_summary">Brief Summary*</label><br>
+		<textarea type="text" name="brief_summary" id="brief_summary" required cols=60 rows=15 placeholder="~2 sentences that are copied into the DOE report."></textarea><br>
+	
+		<label for="other">Other</label><br>
+		<textarea type="text" name="other" id="other" cols=60 rows=15 placeholder="Enter additional information here. Note: Text will follow the formatting rules of the physics elog"></textarea><br>
+	</fieldset>
+	<fieldset>
+		<!-- Should we just use the DOE time format? Does Christine still want oversight of what is reported to DOE?-->
+		<legend>Delivery to Main Program</legend>
+		<label for="useful_beam_time">Useful Beam Time</label><br>
+		<input type="number" name="useful_beam_time" id="useful_beam_time"><br>
+		<label for="unscheduled_accelerator_down">Unscheduled Accelerator Downtime</label><br>
+		<input type="number" name="unscheduled_accelerator_down" id="unscheduled_accelerator_down"><br>
+		<label for="unscheduled_other_down">Unscheduled User Downtime</label><br>
+		<input type="number" name="unscheduled_other_down" id="unscheduled_other_down">
+		<label for="other_down_reason">Reason:</label>
+		<input type="text" name="other_down_reason" id="other_down_reason" placeholder="e.g. Laser"><br>
+		<label for="accelerator_physicist_availability">Accelerator Physicist Availability</label><br>
+		<input type="number" name="accelerator_physicist_availability" id="accelerator_physicist_availability" placeholder="Percentage of Time"><br>
+	</fieldset>
+	
+	<input type="submit" value="Submit">
+</form>
+
+<!--TODO: Add optional text fields - ability to add a text field which the user can name -->
+<!--TODO: Dropdown box of user groups?-->
+<!-- Typical physics elog fields:
+Program (main experiment, Shift, Shift leader/personnel);
+goals; progress; problems; to do on next shift; brief summary;
+Delivery to main program (Useful beam time, unscheduled downtime of accelerator, unscheduled downtime
+-->
+<!-- DOE Report fields:
+Experiment, Date
+Time - (Time beam delivered, Time Promised, Unscheduled accelerator downtime, User Off, Total Time)
+Charge - (S2, S10, S19, S20, SCAV) Delivered and Requested (** TRY TO GET FROM ARCHIVE)
+Emittance - (S2, S4, S11, S18, S20) Delivered and Requested (** TRY TO GET FROM ARCHIVE)
+Bunch Length (Delivered, Requested)
+% Time accelerator support physicist available (** HOW SHOULD WE HANDLE THIS?)
+Summary From User (Take from Brief Summary above)
+-->
