@@ -3,11 +3,20 @@ from app import db
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-class ShiftReport(db.Model):
+class User(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
-	nickname = db.Column(db.String(64), index = True, unique = True)
-	email = db.Column(db.String(120), index = True, unique = True)
-	role = db.Column(db.SmallInteger, default = ROLE_USER)
+	name = db.Column(db.String(30))
+	reports = db.relationship('ShiftReport', backref = 'author', lazy = 'dynamic')
 	
 	def __repr__(self):
-		return '<User %r>' % (self.nickname)
+		return '<User Group %r>' % (self.name)
+
+class ShiftReport(db.Model):
+	id = db.Column(db.Integer, primary_key = True)
+	timestamp = db.Column(db.DateTime())
+	body = db.Column(db.Text())
+	elogurl = db.Column(db.Text())
+	userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+	
+	def __repr__(self):
+		return '<Post %r>' % (self.body)
