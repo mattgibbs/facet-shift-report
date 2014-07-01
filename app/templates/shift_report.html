@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>User Shift Report Form</h1>
+<form action="" method="post" name="report">
+	{{form.hidden_tag()}}
+	<p>
+		Please enter your OpenId:<br>
+		{{form.openid(size=80)}}
+		{% for error in form.errors.openid %}
+		<span style="color: red;">[{{error}}]</span>
+		{% endfor %}<br>
+	</p>
+	<p>
+		Enter other crap here:<br>
+		{{form.textbox(cols=60, rows=15)}}
+		{% for error in form.errors.textbox %}
+		<span style="color: red;">[{{error}}]</span>
+		{% endfor %}<br>
+	</p>
+	<p><input type="submit" value="Submit"></p>
+</form>
+{% endblock %}
+	
+	
+	
+<!-- openid, textbox -->
