@@ -11,16 +11,14 @@
 		{% endfor %}<br>
 	</p>
 	<p>
-		Enter other crap here:<br>
-		{{form.textbox(cols=60, rows=15)}}
-		{% for error in form.errors.textbox %}
+		{{form.goals.label}}<br>
+		{{form.goals(cols=60, rows=15)}}
+		{% for error in form.errors.textboxes %}
 		<span style="color: red;">[{{error}}]</span>
 		{% endfor %}<br>
 	</p>
 	<p><input type="submit" value="Submit"></p>
 </form>
 {% endblock %}
-	
-	
-	
+
 <!-- openid, textbox -->

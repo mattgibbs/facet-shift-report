@@ -1,7 +1,8 @@
 from flask.ext.wtf import Form
-from wtforms import TextField, BooleanField, TextAreaField
+from wtforms import SelectField, TextField, BooleanField, TextAreaField
 from wtforms.validators import Required
 
 class LoginForm(Form):
-	openid = TextField('openid', validators = [Required()])
-	textbox = TextAreaField('Box', validators = [Required()])
+	user 		= SelectField('User Group')
+	openid 		= TextField('openid', validators = [Required()])
+	goals 		= TextAreaField('Goals', validators = [Required()])
