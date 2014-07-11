@@ -4,18 +4,23 @@
 <form action="" method="post" name="report">
 	{{form.hidden_tag()}}
 	<p>
-		Please enter your OpenId:<br>
-		{{form.openid(size=80)}}
-		{% for error in form.errors.openid %}
+		{{form.user.label}}<br>
+		{{form.user()}}
+		{% for error in form.errors.user %}
 		<span style="color: red;">[{{error}}]</span>
 		{% endfor %}<br>
 	</p>
+	{% for textbox in form.textboxes %}
 	<p>
-		{{form.goals.label}}<br>
-		{{form.goals(cols=60, rows=15)}}
+		{{textbox.label}}<br>
+		{{textbox(cols=60, rows=15)}}
 		{% for error in form.errors.textboxes %}
-		<span style="color: red;">[{{error}}]</span>
+		<span style="color: red;">{{error}}</span>
 		{% endfor %}<br>
+	</p>
+	{% endfor %}
+	<p>
+		{{form.body}}<br>
 	</p>
 	<p><input type="submit" value="Submit"></p>
 </form>
