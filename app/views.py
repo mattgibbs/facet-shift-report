@@ -19,12 +19,8 @@ def index():
 
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
 def shift_summary_form():
-	choices = []
-	users = models.User.query.all()
-	for u in users:
-		choices.append((str(u.id), u.name))
 	form = LoginForm()
-	form.setChoices(choices)
+	form.setForm()
 	if form.validate_on_submit():
 		flash("WHATUP")
 		return redirect('/')

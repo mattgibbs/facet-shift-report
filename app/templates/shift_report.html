@@ -3,25 +3,73 @@
 <h1>User Shift Report Form</h1>
 <form action="" method="post" name="report">
 	{{form.hidden_tag()}}
-	<p>
-		{{form.user.label}}<br>
-		{{form.user()}}
-		{% for error in form.errors.user %}
-		<span style="color: red;">[{{error}}]</span>
-		{% endfor %}<br>
-	</p>
-	{% for textbox in form.textboxes %}
-	<p>
-		{{textbox.label}}<br>
-		{{textbox(cols=60, rows=15)}}
-		{% for error in form.errors.textboxes %}
-		<span style="color: red;">{{error}}</span>
-		{% endfor %}<br>
-	</p>
-	{% endfor %}
-	<p>
-		{{form.body}}<br>
-	</p>
+	<div>
+		<p>
+			{{form.user.label}} *<br>
+			{{form.user()}}
+			{% for error in form.errors.user %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.shifts.label}} *<br>
+			{{form.shifts()}}
+			{% for error in form.errors.shifts %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.personnel.label}} *<br>
+			{{form.personnel()}}
+			{% for error in form.errors.personnel %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+	</div>
+	<div>
+		<p>
+			{{form.goals.label}}<br>
+			{{form.goals(cols=60, rows=15)}}
+			{% for error in form.errors.goals %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.progress.label}}<br>
+			{{form.progress(cols=60, rows=15)}}
+			{% for error in form.errors.progress %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.problems.label}}<br>
+			{{form.problems(cols=60, rows=15)}}
+			{% for error in form.errors.problems %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.nextShift.label}}<br>
+			{{form.nextShift(cols=60, rows=15)}}
+			{% for error in form.errors.nextShift %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.briefSummary.label}} *<br>
+			{{form.briefSummary(cols=60, rows=15)}}
+			{% for error in form.errors.briefSummary %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.other.label}}<br>
+			{{form.other(cols=60, rows=15)}}
+			{% for error in form.errors.other %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+	</div>
 	<p><input type="submit" value="Submit"></p>
 </form>
 {% endblock %}
