@@ -2,10 +2,12 @@ Capability to go from form -> database (DONE)
 
 Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
 	Capabilities:
-		Filter - (user, date range, etc.)
+		Filtering functionality - (user, date range, etc.)
 		Order asc, desc
 
 Writing to physics elog (STARTED)
 Getting emittances
 Finalize report ability
 Ability to create users (ADDED CREATE/DELETE SCRIPTS IN BASE FOLDER)
+
+Make everything pretty; i.e. CSS

@@ -25,7 +25,7 @@ class LoginForm(Form):
 	unschedAccDown	= fields.IntegerField('Unscheduled Accelerator Downtime')
 	unschedUserDown	= fields.IntegerField('Unscheduled User Downtime')
 	physAvail		= fields.IntegerField('AcceleratorPhysicistAvailability')
-	'''
+	''' Unsure how I want to add the following:
 	s2chargeDeliv	= fields.DecimalField('')
 	s2chargeReq		= fields.DecimalField('')
 	s10chargeDeliv	= fields.DecimalField('')
