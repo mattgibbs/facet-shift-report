@@ -10,4 +10,4 @@ Getting emittances
 Finalize report ability
 Ability to create users (ADDED CREATE/DELETE SCRIPTS IN BASE FOLDER)
 
-Make everything pretty; i.e. CSS
+Make everything pretty; i.e. CSS (maybe use Bootstrap?)
