@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Hi, Human Being!</h1>
-{% for post in posts %}
-<div><p>{{post.author.nickname}} says: <b>{{post.body}}</b></p></div>
+<h1>Hi, Dude!</h1>
+{% for r in reports %}
+<div><p><b>{{r.shiftStart}}</b> {{r.author.name}} says: <b>{{r.briefSummary}}</b></p></div>
 {% endfor %}
 {% endblock %}

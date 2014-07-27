@@ -1,6 +1,11 @@
-Add capability to go from form -> database (DONE)
-Add past shift report view to index (DOE and regular views?)
-Add writing to physics elog
-Add getting emittances
-Add finalize report ability
-Add ability to create users
+Capability to go from form -> database (DONE)
+
+Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
+	Capabilities:
+		Filter - (user, date range, etc.)
+		Order asc, desc
+
+Writing to physics elog (STARTED)
+Getting emittances
+Finalize report ability
+Ability to create users (ADDED SCRIPTS IN BASE FILE)

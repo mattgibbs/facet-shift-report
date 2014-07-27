@@ -5,17 +5,9 @@ import datetime
 
 @app.route('/')
 def index():
-	posts = [
-		{
-			'author': {'nickname': 'John'},
-			'body': 'Beautiful day in Portland!'
-		},
-		{
-			'author': {'nickname': 'Sarah'},
-			'body': 'The Avengers movie was so cool!'
-		},
-		]
-	return render_template("index.html", posts=posts)
+	reports = models.ShiftReport.query.all()
+	print reports[1].shiftStart
+	return render_template("index.html", reports=reports)
 
 
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
