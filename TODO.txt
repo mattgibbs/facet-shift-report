@@ -8,4 +8,4 @@ Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIG
 Writing to physics elog (STARTED)
 Getting emittances
 Finalize report ability
-Ability to create users (ADDED SCRIPTS IN BASE FILE)
+Ability to create users (ADDED CREATE/DELETE SCRIPTS IN BASE FOLDER)

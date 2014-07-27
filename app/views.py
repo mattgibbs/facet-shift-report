@@ -5,7 +5,7 @@ import datetime
 
 @app.route('/')
 def index():
-	reports = models.ShiftReport.query.all()
+	reports = models.ShiftReport.query.order_by('id desc').all()
 	print reports[1].shiftStart
 	return render_template("index.html", reports=reports)
 

@@ -2,6 +2,6 @@
 {% block content %}
 <h1>Hi, Dude!</h1>
 {% for r in reports %}
-<div><p><b>{{r.shiftStart}}</b> {{r.author.name}} says: <b>{{r.briefSummary}}</b></p></div>
+<div><p><b>{{r.id}}</b> <b>{{r.shiftStart}}</b> {{r.author.name}} says: <b>{{r.briefSummary}}</b></p></div>
 {% endfor %}
 {% endblock %}
