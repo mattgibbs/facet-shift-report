@@ -1,0 +1,6 @@
+Add capability to go from form -> database (DONE)
+Add past shift report view to index (DOE and regular views?)
+Add writing to physics elog
+Add getting emittances
+Add finalize report ability
+Add ability to create users

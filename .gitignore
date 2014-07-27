@@ -1,5 +1,7 @@
 app.db
 ideas.txt
+populateUserDB.py
+
 
 *.pyc
 

@@ -28,6 +28,22 @@
 	</div>
 	<div>
 		<p>
+			{{form.shiftStart.label}} *<br>
+			{{form.shiftStart()}}
+			{% for error in form.errors.shiftStart %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.shiftEnd.label}} *<br>
+			{{form.shiftEnd()}}
+			{% for error in form.errors.shiftEnd %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+	</div>
+	<div>
+		<p>
 			{{form.goals.label}}<br>
 			{{form.goals(cols=60, rows=15)}}
 			{% for error in form.errors.goals %}
@@ -69,6 +85,39 @@
 			<span style="color: red;">{{error}}</span>
 			{% endfor %}<br>
 		</p>
+	</div>
+	<div>
+		<p>
+			{{form.usefulBeam.label}} *<br>
+			{{form.usefulBeam()}}
+			{% for error in form.errors.usefulBeam %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.unschedAccDown.label}} *<br>
+			{{form.unschedAccDown()}}
+			{% for error in form.errors.unschedAccDown %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.unschedUserDown.label}} *<br>
+			{{form.unschedUserDown()}}
+			{% for error in form.errors.unschedUserDown %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+		<p>
+			{{form.physAvail.label}} *<br>
+			{{form.physAvail()}}
+			{% for error in form.errors.physAvail %}
+			<span style="color: red;">{{error}}</span>
+			{% endfor %}<br>
+		</p>
+	</div>
+	<div>
+		
 	</div>
 	<p><input type="submit" value="Submit"></p>
 </form>

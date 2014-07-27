@@ -12,11 +12,46 @@ class User(db.Model):
 		return '<User Group %r>' % (self.name)
 
 class ShiftReport(db.Model):
-	id = db.Column(db.Integer, primary_key = True)
-	timestamp = db.Column(db.DateTime())
-	body = db.Column(db.Text())
-	elogurl = db.Column(db.Text())
-	userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+	id				= db.Column(db.Integer, primary_key = True)
+	elogurl			= db.Column(db.Text())
 	
+	# Everything below exists on the Form
+	user			= db.Column(db.Integer, db.ForeignKey('user.id'))
+	shifts			= db.Column(db.String())
+	personnel		= db.Column(db.Text())
+
+	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
+	shiftStart		= db.Column(db.DateTime())
+	shiftEnd		= db.Column(db.DateTime())
+
+	goals			= db.Column(db.Text())
+	progress		= db.Column(db.Text())
+	problems		= db.Column(db.Text())
+	nextShift		= db.Column(db.Text())
+	briefSummary	= db.Column(db.Text())
+	other			= db.Column(db.Text())
+
+	usefulBeam		= db.Column(db.Integer)
+	unschedAccDown	= db.Column(db.Integer)
+	unschedUserDown	= db.Column(db.Integer)
+	physAvail		= db.Column(db.Integer)
+
+	def __init__(self, form):
+		self.user 				= form.data['user']
+		self.shifts				= form.data['shifts']
+		self.personnel			= form.data['personnel']
+		self.shiftStart			= form.data['shiftStart']
+		self.shiftEnd			= form.data['shiftEnd']
+		self.goals				= form.data['goals']
+		self.progress			= form.data['progress']
+		self.problems			= form.data['problems']
+		self.nextShift			= form.data['nextShift']
+		self.briefSummary		= form.data['briefSummary']
+		self.other				= form.data['other']
+		self.useFulBeam			= form.data['usefulBeam']
+		self.unschedAccDown		= form.data['unschedAccDown']
+		self.unschedUserDown	= form.data['unschedUserDown']
+		self.physAvail			= form.data['physAvail']
+
 	def __repr__(self):
-		return '<Post %r>' % (self.body)
+		return '<Post by %r>' % (self.user)
