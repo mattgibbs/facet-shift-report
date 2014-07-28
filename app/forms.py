@@ -4,6 +4,8 @@ from wtforms.validators import Required
 from app import models
 from datetime import datetime
 
+class UserForm(Form):
+	userName		= fields.TextField('User name', validators = [Required()])
 
 class LoginForm(Form):
 	user 			= fields.SelectField('User Group', choices=[('error', 'FAILED TO LOAD USER GROUPS')], validators=[Required()], default=0)

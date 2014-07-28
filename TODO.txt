@@ -8,8 +8,11 @@ Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIG
 Writing to physics elog (STARTED)
 Getting emittances
 Finalize report ability
-Ability to create users (ADDED CREATE/DELETE SCRIPTS IN BASE FOLDER)
+Ability to create users
+	Scripts in base folder (DONE)
+	Button to create a user with
 
-Make everything pretty; i.e. CSS (maybe use Bootstrap?)
+Make everything pretty (DONE - ADDED BOOTSTRAP FILES)
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+On index page, make user names links to a user viewing page where you can see all posts by a user group.
+	Maybe add a small form to the navbar that accepts a user name

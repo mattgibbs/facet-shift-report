@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db, models
-from forms import LoginForm
+from forms import LoginForm, UserForm
 import datetime
 
 @app.errorhandler(404)
@@ -20,13 +20,12 @@ def shift_summary_form():
 	form.setForm()
 	if form.validate_on_submit():
 		try:
-			print form.data
 			report = models.ShiftReport(form)
 			db.session.add(report)
 			db.session.commit()
-			flash("Successfully uploaded to database!")
-		except :
-			flash("Error")
+			flash("Successfully uploaded to database")
+		except:
+			flash("Error uploading to database")
 		return redirect('/')
 	return render_template('shift_report.html', form=form)
 
@@ -42,3 +41,18 @@ def view_report(reportid = None):
 			return redirect('/')
 	flash("Redirected to root.")
 	return redirect('/')
+
+@app.route('/create_user/', methods=['GET', 'POST'])
+def create_user():
+	form = UserForm()
+	if form.validate_on_submit():
+		try:
+			user = models.User(form)
+			db.session.add(user)
+			db.session.commit()
+			flash("Successfully created user " + form.data['userName'])
+		except:
+			flash("Error creating user. Exception " + type(e))
+		
+		return redirect('/')
+	return render_template('create_user.html', form=form)
