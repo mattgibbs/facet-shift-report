@@ -1,5 +1,5 @@
 Capability to go from form -> database (DONE)
-
+Edit existing reports
 Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
 	Capabilities:
 		Filtering functionality - (user, date range, etc.)
@@ -11,3 +11,5 @@ Finalize report ability
 Ability to create users (ADDED CREATE/DELETE SCRIPTS IN BASE FOLDER)
 
 Make everything pretty; i.e. CSS (maybe use Bootstrap?)
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>

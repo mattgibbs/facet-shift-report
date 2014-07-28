@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from app import app, db, models
 from forms import LoginForm
 import datetime
@@ -6,7 +6,6 @@ import datetime
 @app.route('/')
 def index():
 	reports = models.ShiftReport.query.order_by('id desc').all()
-	print reports[1].shiftStart
 	return render_template("index.html", reports=reports)
 
 
@@ -20,7 +19,7 @@ def shift_summary_form():
 			report = models.ShiftReport(form)
 			db.session.add(report)
 			db.session.commit()
-			flash("Successfully uploaded to database")
+			flash("Successfully uploaded to database!")
 		except :
 			flash("Error")
 		return redirect('/')

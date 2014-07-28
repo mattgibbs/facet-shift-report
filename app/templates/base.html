@@ -1,17 +1,32 @@
 <html>
 	<head>
 		<title>FACET Shift Reports</title>
+		<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+		
+		<script src="/static/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		{% with messages = get_flashed_messages() %}
-		{% if messages %}
-		<u1>
-		{% for message in messages %}
-			<li>{{message}} </li>
-			{% endfor %}
-		</u1>
-		{% endif %}
-		{% endwith %}
-		{% block content %}{% endblock %}
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<a class="btn btn-navbar" data-toggle="collapse" date-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<ul class="nav">
+						<li><a href="{{ url_for('index') }}">Home</a></li>
+						<li class="divider-vertical"></li>
+						<li><a href="{{ url_for('shift_summary_form') }}">New Report</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

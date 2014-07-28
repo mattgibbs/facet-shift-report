@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>FACET Shift Reports</h1>
-{% for r in reports %}
-<div><p><b>{{r.id}}</b> <b>{{r.shiftStart}}</b> {{r.author.name}}: <b>{{r.briefSummary}}</b></p></div>
-{% endfor %}
+{% include 'flash.html' %}
+<div class="well">
+<table class="table table-striped">
+	<tr>
+		<th>Date</th>
+		<th>User</th>
+		<th>Brief Summary</th>
+	</tr>
+	{% for r in reports %}
+		<tr>
+			<td><a href="/shift_summary_form">{{r.shiftEnd}}</a></td>
+			<td>{{r.author.name}}</td>
+			<td>{{r.briefSummary}}</td>
+		</tr>
+	{% endfor %}
+</table>
+</div>
 {% endblock %}

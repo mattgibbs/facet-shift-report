@@ -1,126 +1,152 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>User Shift Report Form</h1>
-<form action="" method="post" name="report">
-	{{form.hidden_tag()}}
-	<div>
-		<p>
-			{{form.user.label}} *<br>
-			{{form.user()}}
-			{% for error in form.errors.user %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.shifts.label}} *<br>
-			{{form.shifts()}}
-			{% for error in form.errors.shifts %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.personnel.label}} *<br>
-			{{form.personnel()}}
-			{% for error in form.errors.personnel %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-	</div>
-	<div>
-		<p>
-			{{form.shiftStart.label}} *<br>
-			{{form.shiftStart()}}
-			{% for error in form.errors.shiftStart %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.shiftEnd.label}} *<br>
-			{{form.shiftEnd()}}
-			{% for error in form.errors.shiftEnd %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-	</div>
-	<div>
-		<p>
-			{{form.goals.label}}<br>
-			{{form.goals(cols=60, rows=15)}}
-			{% for error in form.errors.goals %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.progress.label}}<br>
-			{{form.progress(cols=60, rows=15)}}
-			{% for error in form.errors.progress %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.problems.label}}<br>
-			{{form.problems(cols=60, rows=15)}}
-			{% for error in form.errors.problems %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.nextShift.label}}<br>
-			{{form.nextShift(cols=60, rows=15)}}
-			{% for error in form.errors.nextShift %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.briefSummary.label}} *<br>
-			{{form.briefSummary(cols=60, rows=15)}}
-			{% for error in form.errors.briefSummary %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.other.label}}<br>
-			{{form.other(cols=60, rows=15)}}
-			{% for error in form.errors.other %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-	</div>
-	<div>
-		<p>
-			{{form.usefulBeam.label}} *<br>
-			{{form.usefulBeam()}}
-			{% for error in form.errors.usefulBeam %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.unschedAccDown.label}} *<br>
-			{{form.unschedAccDown()}}
-			{% for error in form.errors.unschedAccDown %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.unschedUserDown.label}} *<br>
-			{{form.unschedUserDown()}}
-			{% for error in form.errors.unschedUserDown %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-		<p>
-			{{form.physAvail.label}} *<br>
-			{{form.physAvail()}}
-			{% for error in form.errors.physAvail %}
-			<span style="color: red;">{{error}}</span>
-			{% endfor %}<br>
-		</p>
-	</div>
-	<div>
-		
-	</div>
-	<p><input type="submit" value="Submit"></p>
-</form>
+{% include 'flash.html' %}
+<div class="well">
+	<form class="form-horizontal" action="" method="post" name="report">
+		{{form.hidden_tag()}}
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="user">{{form.user.label}}</label>
+			<div class="controls">
+				{{ form.user(class = "span2") }}
+				{% for error in form.errors.user %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="shifts">{{form.shifts.label}}</label>
+			<div class="controls">
+				{{ form.shifts(class = "span2") }}
+				{% for error in form.errors.shifts %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="personnel">{{form.personnel.label}}</label>
+			<div class="controls">
+				{{ form.personnel(rows = 4, class = "span4") }}
+				{% for error in form.errors.personnel %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="shiftStart">{{form.shiftStart.label}}</label>
+			<div class="controls">
+				{{ form.shiftStart(class = "span3") }}
+				{% for error in form.errors.shiftStart %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="shiftEnd">{{form.shiftEnd.label}}</label>
+			<div class="controls">
+				{{ form.shiftEnd(class = "span3") }}
+				{% for error in form.errors.shiftEnd %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="goals">{{form.goals.label}}</label>
+			<div class="controls">
+				{{ form.goals(rows = 8, class = "span6") }}
+				{% for error in form.errors.goals %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="progress">{{form.progress.label}}</label>
+			<div class="controls">
+				{{ form.progress(rows = 8, class = "span6") }}
+				{% for error in form.errors.progress %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="problems">{{form.problems.label}}</label>
+			<div class="controls">
+				{{ form.problems(rows = 8, class = "span6") }}
+				{% for error in form.errors.problems %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="nextShift">{{form.nextShift.label}}</label>
+			<div class="controls">
+				{{ form.nextShift(rows = 8, class = "span6") }}
+				{% for error in form.errors.nextShift %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="briefSummary">{{form.briefSummary.label}}</label>
+			<div class="controls">
+				{{ form.briefSummary(rows = 8, class = "span6") }}
+				{% for error in form.errors.briefSummary %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="other">{{form.other.label}}</label>
+			<div class="controls">
+				{{ form.other(rows = 8, class = "span6") }}
+				{% for error in form.errors.other %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
+			<div class="controls">
+				{{ form.usefulBeam(class = "span1") }}
+				{% for error in form.errors.usefulBeam %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="unschedAccDown">{{form.unschedAccDown.label}}</label>
+			<div class="controls">
+				{{ form.unschedAccDown(class = "span1") }}
+				{% for error in form.errors.unschedAccDown %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="unschedUserDown">{{form.unschedUserDown.label}}</label>
+			<div class="controls">
+				{{ form.unschedUserDown(class = "span1") }}
+				{% for error in form.errors.unschedUserDown %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group{% if form.errors.post %} error{% endif %}">
+			<label class="control-label" for="physAvail">{{form.physAvail.label}}</label>
+			<div class="controls">
+				{{ form.physAvail(class = "span1") }}
+				{% for error in form.errors.physAvail %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<input class="btn btn-primary" type="submit" value="Submit">
+			</div>
+		</div>
+	</form>
+</div>
 {% endblock %}
 
 <!-- openid, textbox -->

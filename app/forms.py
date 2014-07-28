@@ -22,9 +22,9 @@ class LoginForm(Form):
 	other			= fields.TextAreaField('Other')
 	
 	usefulBeam		= fields.IntegerField('Useful Beam Time')
-	unschedAccDown	= fields.IntegerField('Unscheduled Accelerator Downtime')
-	unschedUserDown	= fields.IntegerField('Unscheduled User Downtime')
-	physAvail		= fields.IntegerField('AcceleratorPhysicistAvailability')
+	unschedAccDown	= fields.IntegerField('Unsched Accel Down')
+	unschedUserDown	= fields.IntegerField('Unsched User Down')
+	physAvail		= fields.IntegerField('Accel Phys Avail')
 	''' Unsure how I want to add the following:
 	s2chargeDeliv	= fields.DecimalField('')
 	s2chargeReq		= fields.DecimalField('')
