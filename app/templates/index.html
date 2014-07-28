@@ -11,7 +11,7 @@
 	</tr>
 	{% for r in reports %}
 		<tr>
-			<td><a href="/shift_summary_form">{{r.shiftEnd}}</a></td>
+			<td><a href="{{ url_for('view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
 			<td>{{r.author.name}}</td>
 			<td>{{r.briefSummary}}</td>
 		</tr>
