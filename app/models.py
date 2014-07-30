@@ -40,6 +40,9 @@ class ShiftReport(db.Model):
 	physAvail		= db.Column(db.Integer)
 
 	def __init__(self, form):
+		self.read_form(form)
+
+	def read_form(self, form):
 		self.user 				= form.data['user']
 		self.shifts				= form.data['shifts']
 		self.personnel			= form.data['personnel']
@@ -51,10 +54,9 @@ class ShiftReport(db.Model):
 		self.nextShift			= form.data['nextShift']
 		self.briefSummary		= form.data['briefSummary']
 		self.other				= form.data['other']
-		self.useFulBeam			= form.data['usefulBeam']
+		self.usefulBeam			= form.data['usefulBeam']
 		self.unschedAccDown		= form.data['unschedAccDown']
 		self.unschedUserDown	= form.data['unschedUserDown']
 		self.physAvail			= form.data['physAvail']
-
 	def __repr__(self):
 		return '<Post by %r>' % (self.user)

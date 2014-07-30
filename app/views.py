@@ -15,18 +15,35 @@ def index():
 
 
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
-def shift_summary_form():
+@app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
+def shift_summary_form(reportid = None):
 	form = LoginForm()
 	form.setForm()
 	if form.validate_on_submit():
 		try:
-			report = models.ShiftReport(form)
-			db.session.add(report)
+			if reportid:
+				report = models.ShiftReport.query.get(reportid)
+				report.read_form(form)
+			else:
+				report = models.ShiftReport(form)
+				db.session.add(report)
 			db.session.commit()
 			flash("Successfully uploaded to database")
 		except:
 			flash("Error uploading to database")
 		return redirect('/')
+	if reportid:
+		report = models.ShiftReport.query.get(reportid)
+		if report:
+			# Fill out form with data from database
+			print report.user
+			form.read_report(report)
+			print form.user.data
+		else:
+			# Report ID does not exist
+			flash("Report does not exist")
+			return redirect('/shift_summary_form/')
+	print form.user.data
 	return render_template('shift_report.html', form=form)
 
 @app.route('/view_report/<int:reportid>')

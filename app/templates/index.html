@@ -5,13 +5,15 @@
 <div class="well">
 <table class="table table-striped">
 	<tr>
+		<th>ID</th>
 		<th>Date</th>
 		<th>User</th>
 		<th>Brief Summary</th>
 	</tr>
 	{% for r in reports %}
 		<tr>
-			<td><a href="{{ url_for('view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
+			<td>{{r.id}}</td>
+			<td><a href="{{ url_for('shift_summary_form', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
 			<td>{{r.author.name}}</td>
 			<td>{{r.briefSummary}}</td>
 		</tr>

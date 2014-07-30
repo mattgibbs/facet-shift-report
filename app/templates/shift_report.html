@@ -107,7 +107,7 @@
 		<div class="control-group{% if form.errors.post %} error{% endif %}">
 			<label class="control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
 			<div class="controls">
-				{{ form.usefulBeam(class = "span1", placeholder = "ex: 8") }}
+				{{ form.usefulBeam(class = "span1", placeholder = "ex. 8") }}
 				{% for error in form.errors.usefulBeam %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}

@@ -62,6 +62,23 @@ class LoginForm(Form):
 		for u in users:
 			choices.append((str(u.id), u.name))
 		self.user.choices = choices
+		
+	def read_report(self, report):
+		self.user.data 					= str(report.user)
+		self.shifts.data				= report.shifts
+		self.personnel.data				= report.personnel
+		self.shiftStart.data			= report.shiftStart
+		self.shiftEnd.data				= report.shiftEnd
+		self.goals.data					= report.goals
+		self.progress.data				= report.progress
+		self.problems.data				= report.problems
+		self.nextShift.data				= report.nextShift
+		self.briefSummary.data			= report.briefSummary
+		self.other.data					= report.other
+		self.usefulBeam.data			= report.usefulBeam
+		self.unschedAccDown.data		= report.unschedAccDown
+		self.unschedUserDown.data		= report.unschedUserDown
+		self.physAvail.data				= report.physAvail
 	
 	def setShiftChoices(self):
 		self.shifts.choices = [('', 'Please Select'), ('Day', 'Day'), ('Swing', 'Swing'), ('Owl', 'Owl')]
