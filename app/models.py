@@ -43,7 +43,7 @@ class ShiftReport(db.Model):
 		self.read_form(form)
 
 	def read_form(self, form):
-		self.user 				= form.data['user']
+		self.user 				= str(form.data['user']) # Form uses strings. I don't think you can pair int/str in the choices
 		self.shifts				= form.data['shifts']
 		self.personnel			= form.data['personnel']
 		self.shiftStart			= form.data['shiftStart']

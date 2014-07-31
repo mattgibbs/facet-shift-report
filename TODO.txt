@@ -1,17 +1,25 @@
 Capability to go from form -> database (DONE)
-Edit existing reports
+Edit existing reports (DONE)
+
 Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
 	Capabilities:
 		Filtering functionality - (user, date range, etc.)
-		Order asc, desc
+		Ordering functionality
 
-Writing to physics elog (STARTED)
-Getting emittances
-Ability to create users
+Ability to create users (DONE)
 	Scripts in base folder (DONE)
-	Button to create a user with
+	Form to create a user with (DONE)
 
 Make everything pretty (DONE - ADDED BOOTSTRAP FILES)
 
-On index page, make user names links to a user viewing page where you can see all posts by a user group.
+On index page, make user names links to a user viewing page where you can see all posts by a user group. (SOLVED WITH INDEX MODIFICATION)
 	Maybe add a small form to the navbar that accepts a user name (STARTED - MIGHT NEED flask.g TO COMPLETE)
+
+PHYSICS ELOG STUFF
+	Writing to physics elog (STARTED)
+	Getting emittances
+	
+<button type="button" class="btn btn-default btn-lg">
+<span class="glyphicon glyphicon-star"></span>
+
+FIGURE OUT HOW TO CREATE GLYPHICON FOR EDITING REPORTS

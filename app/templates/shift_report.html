@@ -3,145 +3,145 @@
 <h1>User Shift Report</h1>
 {% include 'flash.html' %}
 <div class="well">
-	<form class="form-horizontal" action="" method="post" name="report">
+	<form class="form-horizontal" action="" method="post" name="report" role="form">
 		{{form.hidden_tag()}}
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="user">{{form.user.label}}</label>
-			<div class="controls">
-				{{ form.user(class = "span2") }}
+		<div class="form-group{% if form.errors.user %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="user">{{form.user.label}}</label>
+			<div class="col-sm-2">
+				{{ form.user(class = "form-control") }}
 				{% for error in form.errors.user %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="shifts">{{form.shifts.label}}</label>
-			<div class="controls">
-				{{ form.shifts(class = "span2") }}
+		<div class="form-group{% if form.errors.shifts %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="shifts">{{form.shifts.label}}</label>
+			<div class="col-sm-2">
+				{{ form.shifts(class = "form-control") }}
 				{% for error in form.errors.shifts %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="personnel">{{form.personnel.label}}</label>
-			<div class="controls">
-				{{ form.personnel(rows = 4, class = "span4") }}
+		<div class="form-group{% if form.errors.personnel %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="personnel">{{form.personnel.label}}</label>
+			<div class="col-sm-4">
+				{{ form.personnel(class = "form-control", rows="3") }}
 				{% for error in form.errors.personnel %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="shiftStart">{{form.shiftStart.label}}</label>
-			<div class="controls">
-				{{ form.shiftStart(class = "span3") }}
+		<div class="form-group{% if form.errors.shiftStart %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="shiftStart">{{form.shiftStart.label}}</label>
+			<div class="col-sm-4">
+				{{ form.shiftStart(class = "form-control") }}
 				{% for error in form.errors.shiftStart %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="shiftEnd">{{form.shiftEnd.label}}</label>
-			<div class="controls">
-				{{ form.shiftEnd(class = "span3") }}
+		<div class="form-group{% if form.errors.shiftEnd %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="shiftEnd">{{form.shiftEnd.label}}</label>
+			<div class="col-sm-4">
+				{{ form.shiftEnd(class = "form-control") }}
 				{% for error in form.errors.shiftEnd %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="goals">{{form.goals.label}}</label>
-			<div class="controls">
-				{{ form.goals(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.goals %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="goals">{{form.goals.label}}</label>
+			<div class="col-sm-6">
+				{{ form.goals(class = "form-control", rows="10") }}
 				{% for error in form.errors.goals %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="progress">{{form.progress.label}}</label>
-			<div class="controls">
-				{{ form.progress(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.progress %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="progress">{{form.progress.label}}</label>
+			<div class="col-sm-6">
+				{{ form.progress(class = "form-control", rows="10") }}
 				{% for error in form.errors.progress %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="problems">{{form.problems.label}}</label>
-			<div class="controls">
-				{{ form.problems(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.problems %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="problems">{{form.problems.label}}</label>
+			<div class="col-sm-6">
+				{{ form.problems(class = "form-control", rows="10") }}
 				{% for error in form.errors.problems %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="nextShift">{{form.nextShift.label}}</label>
-			<div class="controls">
-				{{ form.nextShift(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.nextShift %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="nextShift">{{form.nextShift.label}}</label>
+			<div class="col-sm-6">
+				{{ form.nextShift(class = "form-control", rows="10") }}
 				{% for error in form.errors.nextShift %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="briefSummary">{{form.briefSummary.label}}</label>
-			<div class="controls">
-				{{ form.briefSummary(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.briefSummary %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="briefSummary">{{form.briefSummary.label}}</label>
+			<div class="col-sm-6">
+				{{ form.briefSummary(class = "form-control", rows="10") }}
 				{% for error in form.errors.briefSummary %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="other">{{form.other.label}}</label>
-			<div class="controls">
-				{{ form.other(rows = 8, class = "span6") }}
+		<div class="form-group{% if form.errors.other %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="other">{{form.other.label}}</label>
+			<div class="col-sm-6">
+				{{ form.other(class = "form-control", rows="10") }}
 				{% for error in form.errors.other %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
-			<div class="controls">
-				{{ form.usefulBeam(class = "span1", placeholder = "ex. 8") }}
+		<div class="form-group{% if form.errors.usefulBeam %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
+			<div class="col-sm-2">
+				{{ form.usefulBeam(class = "form-control", placeholder = "e.g. 8") }}
 				{% for error in form.errors.usefulBeam %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="unschedAccDown">{{form.unschedAccDown.label}}</label>
-			<div class="controls">
-				{{ form.unschedAccDown(class = "span1") }}
+		<div class="form-group{% if form.errors.unschedAccDown %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="unschedAccDown">{{form.unschedAccDown.label}}</label>
+			<div class="col-sm-2">
+				{{ form.unschedAccDown(class = "form-control", placeholder = "e.g. 8") }}
 				{% for error in form.errors.unschedAccDown %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="unschedUserDown">{{form.unschedUserDown.label}}</label>
-			<div class="controls">
-				{{ form.unschedUserDown(class = "span1") }}
+		<div class="form-group{% if form.errors.unschedUserDown %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="unschedUserDown">{{form.unschedUserDown.label}}</label>
+			<div class="col-sm-2">
+				{{ form.unschedUserDown(class = "form-control", placeholder = "e.g. 8") }}
 				{% for error in form.errors.unschedUserDown %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group{% if form.errors.post %} error{% endif %}">
-			<label class="control-label" for="physAvail">{{form.physAvail.label}}</label>
-			<div class="controls">
-				{{ form.physAvail(class = "span1") }}
+		<div class="form-group{% if form.errors.physAvail %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="physAvail">{{form.physAvail.label}}</label>
+			<div class="col-sm-2">
+				{{ form.physAvail(class = "form-control", placeholder = "e.g. 8") }}
 				{% for error in form.errors.physAvail %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="control-group">
-			<div class="controls">
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-2">
 				<input class="btn btn-primary" type="submit" value="Submit">
 			</div>
 		</div>

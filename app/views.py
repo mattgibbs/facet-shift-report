@@ -9,8 +9,27 @@ def internalerror(error):
 
 @app.route('/')
 @app.route('/index')
-def index():
-	reports = models.ShiftReport.query.order_by('id desc').all()
+@app.route('/index/<int:userid>')
+@app.route('/index/<username>/')
+def index(userid = None, username = None):
+	if userid:
+		user = db.session.query(models.User).get(userid)
+		if user:
+			reports = user.reports.order_by('id desc')
+		else:
+			flash('Invalid user group')
+			return redirect('/')
+	elif username:
+		user = db.session.query(models.User).filter(models.User.name == username).all()
+		if user:
+			return redirect("/index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
+		else:
+			flash(username + ' is an invalid user group')
+			return redirect('/')
+	else:
+		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
+	for r in reports:
+		print r.id, r.shiftStart, r.user
 	return render_template("index.html", reports=reports)
 
 

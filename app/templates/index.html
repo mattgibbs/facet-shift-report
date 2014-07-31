@@ -5,18 +5,22 @@
 <div class="well">
 <table class="table table-striped">
 	<tr>
-		<th>ID</th>
-		<th>Date</th>
-		<th>User</th>
-		<th>Brief Summary</th>
+		<th class="col-sm-2">Date</th>
+		<th class="col-sm-1">User</th>
+		<th class="col-sm-6">Brief Summary</th>
+		<th class="col-sm-1">Edit</th>
 	</tr>
 	{% for r in reports %}
 		<tr>
-			<td>{{r.id}}</td>
-			<td><a href="{{ url_for('shift_summary_form', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
-			<td>{{r.author.name}}</td>
-			<td>{{r.briefSummary}}</td>
+			<td class="col-sm-2"><a href="{{ url_for('view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
+			<td class="col-sm-1"><a href="{{ url_for('index', userid=r.author.id) }}">{{r.author.name}}</a></td>
+			<td class="col-sm-6">{{r.briefSummary}}</td>
+			<td class="col-sm-1">
+					<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span></a>
+				
+			</td>
 		</tr>
+		
 	{% endfor %}
 </table>
 </div>

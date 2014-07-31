@@ -7,15 +7,15 @@
 		<script src="/static/js/bootstrap.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
-	<body>
-		<div class="container">
-			<div class="navbar navbar-inverse" role="navigation">
+	<header>
+		<div class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
 				<div class="navbar-inner">
 					<a class="btn btn-navbar" data-toggle="collapse" date-target=".nav-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<ul class="nav">
+					<ul class="nav navbar-nav">
 						<li><a href="{{ url_for('index') }}">Home</a></li>
 						<li class="divider-vertical"></li>
 						<li><a href="{{ url_for('shift_summary_form') }}">New Report</a></li>
@@ -24,16 +24,16 @@
 					</ul>
 					<form class="navbar-form pull-right" role="search">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Go To User" name="userGroup" id="userGroup">
+							<input type="text" class="form-control" placeholder="See User Posts ex E200" name="userGroup" id="userGroup">
 						</div>
 					</form>
 				</div>
 			</div>
-			<div class="row">
-				<div class="span12">
-					{% block content %}{% endblock %}
-				</div>
-			</div>
+		</div>
+	</header>
+	<body>
+		<div class="container-fluid">
+			{% block content %}{% endblock %}
 		</div>
 	</body>
 </html>
