@@ -8,8 +8,9 @@ class User(db.Model):
 	name = db.Column(db.String(30))
 	reports = db.relationship('ShiftReport', backref = 'author', lazy = 'dynamic')
 	
-	def __init__(self, form):
-		self.name = form.data['userName']
+	def __init__(self, form=None):
+		if form:
+			self.name = form.data['userName']
 	
 	def __repr__(self):
 		return '<User Group %r>' % (self.name)
@@ -40,8 +41,9 @@ class ShiftReport(db.Model):
 	unschedUserDown	= db.Column(db.Integer)
 	physAvail		= db.Column(db.Integer)
 
-	def __init__(self, form):
-		self.read_form(form)
+	def __init__(self, form=None):
+		if form:
+			self.read_form(form)
 
 	def read_form(self, form):
 		self.user 				= str(form.data['user']) # Form uses strings. I don't think you can pair int/str in the choices

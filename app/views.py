@@ -86,6 +86,7 @@ def create_user():
 	form = UserForm()
 	if form.validate_on_submit():
 		try:
+			# TODO check that user doesn't already exist
 			user = models.User(form)
 			db.session.add(user)
 			db.session.commit()
