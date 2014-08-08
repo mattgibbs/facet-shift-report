@@ -1,11 +1,6 @@
 Capability to go from form -> database (DONE)
 Edit existing reports (DONE)
 
-Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
-	Capabilities:
-		Filtering functionality - (user, date range, etc.)
-		Ordering functionality
-
 Ability to create users (DONE)
 	Scripts in base folder (DONE)
 	Form to create a user with (DONE)
@@ -15,11 +10,19 @@ Make everything pretty (DONE - ADDED BOOTSTRAP FILES)
 On index page, make user names links to a user viewing page where you can see all posts by a user group. (SOLVED WITH INDEX MODIFICATION)
 	Maybe add a small form to the navbar that accepts a user name (STARTED - MIGHT NEED flask.g TO COMPLETE)
 
+FIGURE OUT HOW TO CREATE GLYPHICON FOR EDITING REPORTS (done)
+
+FOR ADAM TO DO:
+
 PHYSICS ELOG STUFF
 	Writing to physics elog (STARTED)
+		CRON job might not work. Look into direct HTTP GET/POST requests. Requests module for Python will be useful.
 	Getting emittances
-	
-<button type="button" class="btn btn-default btn-lg">
-<span class="glyphicon glyphicon-star"></span>
 
-FIGURE OUT HOW TO CREATE GLYPHICON FOR EDITING REPORTS
+Add past shift report view to index (DOE and regular views?) (STARTED - HAVE FIGURED OUT THE BASICS)
+
+Add link to e-log URL. Write the urls to the database.
+
+Capabilities to add to index page:
+	Filtering functionality - (user (done), date range, etc.)
+	Ordering functionality

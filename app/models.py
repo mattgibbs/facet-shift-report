@@ -16,7 +16,7 @@ class User(db.Model):
 
 class ShiftReport(db.Model):
 	id				= db.Column(db.Integer, primary_key = True)
-	elogurl			= db.Column(db.Text())
+	elogurl			= db.Column(db.Text()) # Edit when we write our entry to the elog.
 	
 	# Everything below exists on the Form
 	user			= db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -24,6 +24,7 @@ class ShiftReport(db.Model):
 	personnel		= db.Column(db.Text())
 
 	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
+	postTime		= db.Column(db.DateTime())
 	shiftStart		= db.Column(db.DateTime())
 	shiftEnd		= db.Column(db.DateTime())
 
@@ -46,6 +47,7 @@ class ShiftReport(db.Model):
 		self.user 				= str(form.data['user']) # Form uses strings. I don't think you can pair int/str in the choices
 		self.shifts				= form.data['shifts']
 		self.personnel			= form.data['personnel']
+		self.postTime			= form.data['postTime']
 		self.shiftStart			= form.data['shiftStart']
 		self.shiftEnd			= form.data['shiftEnd']
 		self.goals				= form.data['goals']

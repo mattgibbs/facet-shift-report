@@ -32,6 +32,15 @@
 				{% endfor %}
 			</div>
 		</div>
+		<div class="form-group{% if form.errors.postTime %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="postTime">{{form.postTime.label}}</label>
+			<div class="col-sm-4">
+				{{ form.postTime(class = "form-control") }}
+				{% for error in form.errors.postTime %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
 		<div class="form-group{% if form.errors.shiftStart %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="shiftStart">{{form.shiftStart.label}}</label>
 			<div class="col-sm-4">

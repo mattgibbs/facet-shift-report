@@ -8,6 +8,9 @@ def internalerror(error):
 	return render_template('404.html'), 404
 
 @app.route('/')
+def root_index():
+	return redirect('/index')
+
 @app.route('/index')
 @app.route('/index/<int:userid>')
 @app.route('/index/<username>/')
@@ -62,12 +65,12 @@ def shift_summary_form(reportid = None):
 			# Report ID does not exist
 			flash("Report does not exist")
 			return redirect('/shift_summary_form/')
-	print form.user.data
 	return render_template('shift_report.html', form=form)
 
+@app.route('/view_report')
+@app.route('/view_report/')
 @app.route('/view_report/<int:reportid>')
 def view_report(reportid = None):
-	print reportid
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
 		if report:
@@ -75,7 +78,7 @@ def view_report(reportid = None):
 		else:
 			flash("Failed to load report #" + str(reportid) + ". Report does not exist.")
 			return redirect('/')
-	flash("Redirected to root.")
+	flash("No report specified. Redirected to root.")
 	return redirect('/')
 
 @app.route('/create_user/', methods=['GET', 'POST'])
