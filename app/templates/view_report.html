@@ -1,5 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 {% include 'flash.html' %}
-<h1>NOT YET IMPLEMENTED</h1>
+<h1>Shift Report for {{ report.shiftStart }}</h1>
+<dl class="dl-horizontal">
+  <dt>User Group</dt>
+  <dd>{{ report.author.name }}</dd>
+  <dt>Shift</dt>
+  <dd>{{ report.shifts }}</dd>
+  <dt>Shift Personnel</dt>
+  <dd>{{ report.personnel }}</dd>
+  <dt>Shift Start Time</dt>
+  <dd>{{ report.shiftStart }}</dd>
+  <dt>Shift End Time</dt>
+  <dd>{{ report.shiftEnd }}</dd>
+  <dt>Goals</dt>
+  <dd>{{ report.goals }}</dd>
+  <dt>Progress</dt>
+  <dd>{{ report.progress }}</dd>
+  <dt>Problems</dt>
+  <dd>{{ report.problems }}</dd>
+  <dt>To Do On Next Shift</dt>
+  <dd>{{ report.nextShift }}</dd>
+  <dt>Brief Summary</dt>
+  <dd>{{ report.briefSummary }}</dd>
+  <dt>Other Notes</dt>
+  <dd>{{ report.other }}</dd>
+  <dt>Useful Beam Time</dt>
+  <dd>{{ report.usefulBeam }}</dd>
+  <dt>Unscheduled Accelerator Downtime</dt>
+  <dd>{{ report.unschedAccDown }}</dd>
+  <dt>Unscheduled User Downtime</dt>
+  <dd>{{ report.unschedUserDown }}</dd>
+  <dt>Accelerator Physics Available</dt>
+  <dd>{{ report.physAvail }}</dd>
+</dl>
 {% endblock %}
