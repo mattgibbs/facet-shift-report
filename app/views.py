@@ -56,9 +56,15 @@ def shift_summary_form(reportid = None):
 				report = models.ShiftReport(form)
 				db.session.add(report)
 			db.session.commit()
-			flash("Successfully uploaded to database")
+			dbmessage = "Successfully uploaded to database, "
+			try:
+				report.post_to_logbook()
+				logmessage = "and FACET E-Log entry created."
+			except HTTPError:
+				logmessage = "but could not create FACET entry."
+			flash(dbmessage + logmessage)
 		except:
-			flash("Error uploading to database")
+			flash("Error uploading to database.")
 		return redirect('/')
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
