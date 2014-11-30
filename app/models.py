@@ -1,4 +1,6 @@
 from app import db
+import physicslog
+import time
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -64,3 +66,24 @@ class ShiftReport(db.Model):
 		self.physAvail			= form.data['physAvail']
 	def __repr__(self):
 		return '<Post by %r>' % (self.user)
+        
+	def post_to_logbook(self):
+		entry = physicslog.Entry()
+		entry.title = "FACET User Summary for {0} Shift".format(self.shifts)
+		entry.author = self.author.name
+		entry.text = ("__User:__ {0} \r\n" + 
+					"__Shift Start:__ {1} \r\n" +
+					"__Shift End:__ {2} \r\n" +
+					"__Goals:__ {3} \r\n" +
+					"__Progress:__ {4} \r\n" +
+					"__Problems:__ {5} \r\n" +
+					"__To Do Next Shift:__ {6} \r\n" +
+					"__Brief Summary:__ {7} \r\n" +
+					"__Other:__ {8} \r\n" +
+					"| Useful Beam Time | Accelerator Downtime | User Downtime | Acc Physics Available \r\n" +
+					"| {9} | {10} | {11} | {12}").format(self.author.name, self.shiftStart, self.shiftEnd,
+														self.goals, self.progress, self.problems, self.nextShift,
+														self.briefSummary, self.other, self.usefulBeam,
+														self.unschedAccDown, self.unschedUserDown, self.physAvail)
+		entry.timestamp = self.postTime
+		entry.submit("facetelog")
