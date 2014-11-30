@@ -8,3 +8,7 @@ populateUserDB.py
 # Ignore the virtual environment and the repository
 venv/
 db_repository/
+app/__init__.pyc
+app/forms.pyc
+app/views.pyc
+config.pyc
