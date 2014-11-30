@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from app import app, db, models
 from forms import LoginForm, UserForm
 import datetime
@@ -15,6 +15,7 @@ def root_index():
 @app.route('/index/<int:userid>')
 @app.route('/index/<username>/')
 def index(userid = None, username = None):
+	user = None
 	if userid:
 		user = db.session.query(models.User).get(userid)
 		if user:
@@ -22,8 +23,13 @@ def index(userid = None, username = None):
 		else:
 			flash('Invalid user group')
 			return redirect('/')
-	elif username:
-		user = db.session.query(models.User).filter(models.User.name == username).all()
+	elif username or request.args.get('userGroup',''):
+		if username:
+			userToFind = username
+		elif request.args.get('userGroup',''):
+			userToFind = request.args.get('userGroup','')
+		
+		user = db.session.query(models.User).filter(models.User.name == userToFind).all()
 		if user:
 			return redirect("/index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
 		else:
@@ -33,7 +39,7 @@ def index(userid = None, username = None):
 		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
 	for r in reports:
 		print r.id, r.shiftStart, r.user
-	return render_template("index.html", reports=reports)
+	return render_template("index.html", reports=reports, user=user)
 
 
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])

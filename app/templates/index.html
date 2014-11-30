@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>FACET Shift Reports</h1>
+<h1>{{ 'FACET Shift Reports' + (' for ' + user.name if user else '') }}</h1>
 {% include 'flash.html' %}
 <div class="well">
 <table class="table table-striped">
