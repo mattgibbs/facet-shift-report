@@ -1,9 +1,12 @@
-import datetime, requests, re, os.path, mimetypes
+import requests, re, os.path, mimetypes
+from datetime import datetime
 class Entry:
 	def __init__(self, title = None, author = None, text = None):
 		self.text = text
 		self.title = title
 		self.author = author
+		self.timestamp = None
+		self.file_path = None
 	
 	def to_dict(self):
 		entry_dict = dict()
