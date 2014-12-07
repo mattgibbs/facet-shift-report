@@ -22,7 +22,7 @@ def index(userid = None, username = None):
 			reports = user.reports.order_by('id desc')
 		else:
 			flash('Invalid user group')
-			return redirect('/')
+			return redirect('index')
 	elif username or request.args.get('userGroup',''):
 		if username:
 			userToFind = username
@@ -34,7 +34,7 @@ def index(userid = None, username = None):
 			return redirect("index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
 		else:
 			flash(username + ' is an invalid user group')
-			return redirect('/')
+			return redirect('index')
 	else:
 		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
 	for r in reports:
@@ -65,7 +65,7 @@ def shift_summary_form(reportid = None):
 			flash(dbmessage + logmessage)
 		except:
 			flash("Error uploading to database.")
-		return redirect('/')
+		return redirect('index')
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
 		if report:
@@ -89,9 +89,9 @@ def view_report(reportid = None):
 			return render_template('view_report.html', report=report)
 		else:
 			flash("Failed to load report #" + str(reportid) + ". Report does not exist.")
-			return redirect('/')
+			return redirect('index')
 	flash("No report specified. Redirected to root.")
-	return redirect('/')
+	return redirect('index')
 
 @app.route('/create_user/', methods=['GET', 'POST'])
 def create_user():
@@ -106,5 +106,5 @@ def create_user():
 		except:
 			flash("Error creating user. Exception " + type(e))
 		
-		return redirect('/')
+		return redirect('index')
 	return render_template('create_user.html', form=form)
