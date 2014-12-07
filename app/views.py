@@ -9,7 +9,7 @@ def internalerror(error):
 
 @app.route('/')
 def root_index():
-	return redirect('/index')
+	return redirect('index')
 
 @app.route('/index')
 @app.route('/index/<int:userid>')
@@ -31,7 +31,7 @@ def index(userid = None, username = None):
 		
 		user = db.session.query(models.User).filter(models.User.name == userToFind).all()
 		if user:
-			return redirect("/index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
+			return redirect("index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
 		else:
 			flash(username + ' is an invalid user group')
 			return redirect('/')
@@ -76,7 +76,7 @@ def shift_summary_form(reportid = None):
 		else:
 			# Report ID does not exist
 			flash("Report does not exist")
-			return redirect('/shift_summary_form/')
+			return redirect('shift_summary_form/')
 	return render_template('shift_report.html', form=form)
 
 @app.route('/view_report')
