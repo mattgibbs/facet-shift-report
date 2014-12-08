@@ -2,6 +2,8 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db, models
 from forms import LoginForm, UserForm
 import datetime
+from requests import HTTPError
+from requests import ConnectionError
 
 @app.errorhandler(404)
 def internalerror(error):
@@ -48,23 +50,27 @@ def shift_summary_form(reportid = None):
 	form = LoginForm()
 	form.setForm()
 	if form.validate_on_submit():
+		if reportid:
+			report = models.ShiftReport.query.get(reportid)
+			report.read_form(form)
+		else:
+			report = models.ShiftReport(form)
+			db.session.add(report)
+			
 		try:
-			if reportid:
-				report = models.ShiftReport.query.get(reportid)
-				report.read_form(form)
-			else:
-				report = models.ShiftReport(form)
-				db.session.add(report)
 			db.session.commit()
 			dbmessage = "Successfully uploaded to database, "
-			try:
-				report.post_to_logbook()
-				logmessage = "and FACET E-Log entry created."
-			except HTTPError:
-				logmessage = "but could not create FACET entry."
-			flash(dbmessage + logmessage)
 		except:
-			flash("Error uploading to database.")
+			flash("Could not create shift report.")
+			return redirect('index')
+			
+		try:
+			report.post_to_logbook()
+			logmessage = "and FACET E-Log entry created."
+		except (HTTPError, ConnectionError):
+			logmessage = "but could not create FACET entry."
+		
+		flash(dbmessage + logmessage)
 		return redirect('index')
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
