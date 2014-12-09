@@ -38,10 +38,10 @@ class ShiftReport(db.Model):
 	briefSummary	= db.Column(db.Text())
 	other			= db.Column(db.Text())
 
-	usefulBeam		= db.Column(db.Integer)
-	unschedAccDown	= db.Column(db.Integer)
-	unschedUserDown	= db.Column(db.Integer)
-	physAvail		= db.Column(db.Integer)
+	usefulBeam		= db.Column(db.Float)
+	unschedAccDown	= db.Column(db.Float)
+	unschedUserDown	= db.Column(db.Float)
+	physAvail		= db.Column(db.Float)
 
 	def __init__(self, form=None):
 		if form:

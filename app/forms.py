@@ -24,10 +24,10 @@ class LoginForm(Form):
 	briefSummary	= fields.TextAreaField('Brief Summary', validators = [Required()])
 	other			= fields.TextAreaField('Other')
 
-	usefulBeam		= fields.IntegerField('Useful Beam Time')
-	unschedAccDown	= fields.IntegerField('Unsched Accel Down')
-	unschedUserDown	= fields.IntegerField('Unsched User Down')
-	physAvail		= fields.IntegerField('Accel Phys Avail')
+	usefulBeam		= fields.DecimalField('Useful Beam Time')
+	unschedAccDown	= fields.DecimalField('Unsched Accel Down')
+	unschedUserDown	= fields.DecimalField('Unsched User Down')
+	physAvail		= fields.DecimalField('Accel Phys Avail')
 	''' Unsure how I want to add the following:
 	s2chargeDeliv	= fields.DecimalField('')
 	s2chargeReq		= fields.DecimalField('')
