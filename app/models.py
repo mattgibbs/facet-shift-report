@@ -72,15 +72,15 @@ class ShiftReport(db.Model):
 		entry.title = "FACET User Summary for {0} Shift".format(self.shifts)
 		entry.author = self.author.name
 		entry.text = ("__User:__ {0} \r\n" + 
-					"__Personnel:__ {1}"
+					"__Personnel:__ {1} \r\n"
 					"__Shift Start:__ {2} \r\n" +
-					"__Shift End:__ {3} \r\n" +
-					"__Goals:__\r\n{4}\r\n" +
-					"__Progress:__\r\n{5}\r\n" +
-					"__Problems:__\r\n{6}\r\n" +
-					"__To Do Next Shift:__\r\n{7}\r\n" +
-					"__Brief Summary:__\r\n{8}\r\n" +
-					"__Other:__\r\n{9}\r\n" +
+					"__Shift End:__ {3} \r\n\r\n" +
+					"__Goals:__\r\n{4}\r\n\r\n" +
+					"__Progress:__\r\n{5}\r\n\r\n" +
+					"__Problems:__\r\n{6}\r\n\r\n" +
+					"__To Do Next Shift:__\r\n{7}\r\n\r\n" +
+					"__Brief Summary:__\r\n{8}\r\n\r\n" +
+					"__Other:__\r\n{9}\r\n\r\n" +
 					"| Useful Beam Time | Accelerator Downtime | User Downtime | Acc Physics Available \r\n" +
 					"| {10} | {11} | {12} | {13}").format(self.author.name, self.personnel, self.shiftStart, self.shiftEnd,
 														self.goals, self.progress, self.problems, self.nextShift,
