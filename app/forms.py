@@ -59,7 +59,7 @@ class LoginForm(Form):
 
 	def setUserChoices(self):
 		choices = [('', 'Please Select')] # Empty string means that required validator returns false
-		users = models.User.query.all()
+		users = models.User.query.order_by('name asc').all()
 		for u in users:
 			choices.append((str(u.id), u.name)) # Two parenthesis since the choice pairs are tuples
 		self.user.choices = choices
