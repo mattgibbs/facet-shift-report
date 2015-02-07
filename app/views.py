@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, models
-from forms import LoginForm, UserForm
+from forms import ShiftForm, UserForm
 import datetime
 import nl2br
 import datetimeformat
@@ -49,7 +49,7 @@ def index(userid = None, username = None):
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
 @app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
 def shift_summary_form(reportid = None):
-	form = LoginForm()
+	form = ShiftForm()
 	form.setForm()
 	if form.validate_on_submit():
 		if reportid:
