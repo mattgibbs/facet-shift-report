@@ -114,5 +114,36 @@ def create_user():
 		except:
 			flash("Error creating user. Exception " + type(e))
 		
-		return redirect('index')
+		return redirect('users')
 	return render_template('create_user.html', form=form)
+	
+@app.route('/edit_user/<int:userid>', methods=['GET', 'POST'])
+def edit_user(userid = None):
+	form = UserForm()
+	try:
+		user = models.User.query.get(userid)
+	except:
+		flash("Error fetching user.  Exception " + type(e))
+		
+	if form.validate_on_submit():
+		try:
+			# TODO check that user doesn't already exist
+			print form.userName.data
+			user.read_form(form)
+			print user.name
+			db.session.commit()
+			flash("Successfully updated user " + form.data['userName'])
+		except:
+			flash("Error editing user.")
+		return redirect('index')
+	else:
+		form.read_user(user)
+		
+	return render_template('edit_user.html', form=form, user=user)
+	
+@app.route('/users')
+@app.route('/users/')
+def list_users():
+	users = db.session.query(models.User).order_by('name asc').all()
+	return render_template('list_users.html', users=users)
+	

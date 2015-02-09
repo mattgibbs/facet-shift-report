@@ -10,9 +10,12 @@ class User(db.Model):
 	name = db.Column(db.String(30))
 	reports = db.relationship('ShiftReport', backref = 'author', lazy = 'dynamic')
 	
+	def read_form(self, form):
+		self.name = form.data['userName']
+	
 	def __init__(self, form=None):
 		if form:
-			self.name = form.data['userName']
+			self.read_form(form)
 	
 	def __repr__(self):
 		return '<User Group %r>' % (self.name)

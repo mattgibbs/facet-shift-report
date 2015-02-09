@@ -6,6 +6,8 @@ from datetime import datetime
 
 class UserForm(Form):
 	userName		= fields.TextField('User name', validators = [Required()])
+	def read_user(self, user):
+		self.userName.data = str(user.name)
 
 class ShiftForm(Form):
 	user 			= fields.SelectField('User Group', choices=[('error', 'FAILED TO LOAD USER GROUPS')], validators=[Required()], default=0)

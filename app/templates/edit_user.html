@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'flash.html' %}
+<h1>Edit User {{ user.name }}</h1>
+<div class="well">
+	<form class="form-horizontal" action="" method="post" name="user">
+		{{form.hidden_tag()}}
+		<div class="form-group{% if form.errors.userName %} has-error{% endif %}">
+			<label class="col-sm-2 control-label" for="userName">{{form.userName.label}}</label>
+			<div class="col-sm-4">
+				{{ form.userName(class = "form-control") }}
+				{% for error in form.errors.userName %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-2">
+				<input class="btn btn-primary" type="submit" value="Submit">
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
