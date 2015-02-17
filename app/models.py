@@ -47,6 +47,7 @@ class ShiftReport(db.Model):
 	unschedAccDown	= db.Column(db.Float)
 	unschedUserDown	= db.Column(db.Float)
 	physAvail		= db.Column(db.Float)
+	requested_time = db.Column(db.Float)
 
 	def __init__(self, form=None):
 		if form:
@@ -69,6 +70,7 @@ class ShiftReport(db.Model):
 		self.unschedAccDown		= form.data['unschedAccDown']
 		self.unschedUserDown	= form.data['unschedUserDown']
 		self.physAvail			= form.data['physAvail']
+		self.requested_time = form.data['requested_time']
 	def __repr__(self):
 		return '<Post by %r>' % (self.user)
         

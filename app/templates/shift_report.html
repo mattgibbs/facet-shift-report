@@ -132,6 +132,18 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.usefulBeam %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.requested_time.label }}</div>
+        <div class="help-block"></div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.requested_time(class = "form-control", placeholder = "e.g. 8") }} hours
+				{% for error in form.errors.requested_time %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group{% if form.errors.usefulBeam %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
 			<div class="col-sm-2">
 				{{ form.usefulBeam(class = "form-control", placeholder = "e.g. 8") }} hours
