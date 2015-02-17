@@ -75,7 +75,7 @@ class ShiftReport(db.Model):
 		entry.title = "FACET User Summary for {0} Shift".format(self.shifts)
 		entry.author = self.author.name
 		entry.text = ("__User:__ {0} \r\n" + 
-					"__Personnel:__ {1} \r\n"
+					"__Personnel:__ {1} \r\n" +
 					"__Shift Start:__ {2} \r\n" +
 					"__Shift End:__ {3} \r\n\r\n" +
 					"__Goals:__\r\n{4}\r\n\r\n" +
