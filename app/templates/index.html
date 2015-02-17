@@ -7,14 +7,16 @@
 	<tr>
 		<th class="col-sm-2">Date</th>
 		<th class="col-sm-1">Experiment</th>
-		<th class="col-sm-6">Brief Summary</th>
+    <th class="col-sm-2">Experiment Title</th>
+		<th class="col-sm-4">Brief Summary</th>
 		<th class="col-sm-1">Edit</th>
 	</tr>
 	{% for r in reports %}
 		<tr>
 			<td class="col-sm-2"><a href="{{ url_for('view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
-			<td class="col-sm-1"><a href="{{ url_for('index', userid=r.author.id) }}">{{r.author.name + " - " + r.author.experiment_title}}</a></td>
-			<td class="col-sm-6">{{r.briefSummary}}</td>
+			<td class="col-sm-1"><a href="{{ url_for('index', userid=r.author.id) }}">{{r.author.name}}</a></td>
+      <td class="col-sm-2">{{r.author.experiment_title}}</td>
+			<td class="col-sm-4">{{r.briefSummary}}</td>
 			<td class="col-sm-1">
 					<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span></a>
 			</td>
