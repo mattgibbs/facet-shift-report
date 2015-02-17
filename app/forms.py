@@ -6,8 +6,10 @@ from datetime import datetime
 
 class UserForm(Form):
 	userName		= fields.TextField('Experiment name', validators = [Required()])
+	experiment_title = fields.TextField('Experiment title', validators = [Required()])
 	def read_user(self, user):
 		self.userName.data = str(user.name)
+		self.experiment_title.data = str(user.experiment_title)
 
 class ShiftForm(Form):
 	user 			= fields.SelectField('Experiment', choices=[('error', 'FAILED TO LOAD EXPERIMENTS')], validators=[Required()], default=0)

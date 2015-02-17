@@ -8,10 +8,12 @@ ROLE_ADMIN = 1
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
 	name = db.Column(db.String(30))
+	experiment_title = db.Column(db.String(140))
 	reports = db.relationship('ShiftReport', backref = 'author', lazy = 'dynamic')
 	
 	def read_form(self, form):
 		self.name = form.data['userName']
+		self.experiment_title = form.data['experiment_title']
 	
 	def __init__(self, form=None):
 		if form:

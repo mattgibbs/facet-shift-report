@@ -5,13 +5,15 @@
 <div class="well">
 <table class="table table-striped">
 	<tr>
-		<th class="col-sm-1">Experiment</th>
+		<th class="col-sm-1">Name</th>
+    <th>Experiment Title</th>
     <th></th>
     <th></th>
 	</tr>
 	{% for u in users %}
 		<tr>
 			<td>{{u.name}}</td>
+      <td>{{u.experiment_title}}</td>
       <td><a href="{{ url_for('index', userid=u.id) }}">View reports</a></td>
       <td><a href="{{ url_for('edit_experiment', userid=u.id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit experiment</a></td>
 		</tr>
