@@ -37,7 +37,7 @@ def index(userid = None, username = None):
 		if user:
 			return redirect("index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
 		else:
-			flash(username + ' is an invalid experiment name.')
+			flash((username or request.args.get('userGroup','')) + ' is an invalid experiment name.')
 			return redirect('index')
 	else:
 		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
