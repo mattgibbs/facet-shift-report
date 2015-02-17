@@ -26,12 +26,12 @@ class ShiftForm(Form):
 	problems		= fields.TextAreaField('Problems')
 	nextShift		= fields.TextAreaField('To Do On Next Shift')
 	briefSummary	= fields.TextAreaField('Brief Summary', validators = [Required()])
-	other			= fields.TextAreaField('Other')
+	other			= fields.TextAreaField('Other Notes')
 
 	usefulBeam		= fields.DecimalField('Useful Beam Time')
-	unschedAccDown	= fields.DecimalField('Unsched Accel Down')
-	unschedUserDown	= fields.DecimalField('Unsched User Down')
-	physAvail		= fields.DecimalField('Accel Phys Avail')
+	unschedAccDown	= fields.DecimalField('Unscheduled Accelerator Downtime')
+	unschedUserDown	= fields.DecimalField('Unscheduled User Downtime')
+	physAvail		= fields.DecimalField('Accelerator Physics Group Support Available')
 	''' Unsure how I want to add the following:
 	s2chargeDeliv	= fields.DecimalField('')
 	s2chargeReq		= fields.DecimalField('')

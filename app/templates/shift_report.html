@@ -60,7 +60,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.goals %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="goals">{{form.goals.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.goals.label }}</div>
+        <div class="help-block">What you expected to accomplish on this shift.</div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.goals(class = "form-control", rows="10") }}
 				{% for error in form.errors.goals %}
@@ -69,7 +72,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.progress %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="progress">{{form.progress.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.progress.label }}</div>
+        <div class="help-block">What was successful on this shift?</div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.progress(class = "form-control", rows="10") }}
 				{% for error in form.errors.progress %}
@@ -78,7 +84,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.problems %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="problems">{{form.problems.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.problems.label }}</div>
+        <div class="help-block">What wasn't?</div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.problems(class = "form-control", rows="10") }}
 				{% for error in form.errors.problems %}
@@ -87,7 +96,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.nextShift %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="nextShift">{{form.nextShift.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.nextShift.label }}</div>
+        <div class="help-block">Your plan for the next time you'll have beam.</div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.nextShift(class = "form-control", rows="10") }}
 				{% for error in form.errors.nextShift %}
@@ -96,7 +108,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.briefSummary %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="briefSummary">{{form.briefSummary.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.briefSummary.label }}</div>
+        <div class="help-block">Two or three sentences that are <b>copied into a report sent to the Department of Energy</b>. <a href="https://portal.slac.stanford.edu/sites/ard_public/facet/faq/Lists/FACET%20ELOG/FAQ.aspx">See examples on the FACET FAQ.</a></div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.briefSummary(class = "form-control", rows="10") }}
 				{% for error in form.errors.briefSummary %}
@@ -105,7 +120,10 @@
 			</div>
 		</div>
 		<div class="form-group{% if form.errors.other %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="other">{{form.other.label}}</label>
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.other.label }}</div>
+        <div class="help-block">Any other information you might want to add that doesn't fit another field.</div>
+      </div>
 			<div class="col-sm-6">
 				{{ form.other(class = "form-control", rows="10") }}
 				{% for error in form.errors.other %}
@@ -116,7 +134,7 @@
 		<div class="form-group{% if form.errors.usefulBeam %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="usefulBeam">{{form.usefulBeam.label}}</label>
 			<div class="col-sm-2">
-				{{ form.usefulBeam(class = "form-control", placeholder = "e.g. 8") }}
+				{{ form.usefulBeam(class = "form-control", placeholder = "e.g. 8") }} hours
 				{% for error in form.errors.usefulBeam %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
@@ -125,7 +143,7 @@
 		<div class="form-group{% if form.errors.unschedAccDown %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="unschedAccDown">{{form.unschedAccDown.label}}</label>
 			<div class="col-sm-2">
-				{{ form.unschedAccDown(class = "form-control", placeholder = "e.g. 8") }}
+				{{ form.unschedAccDown(class = "form-control", placeholder = "e.g. 8") }} hours
 				{% for error in form.errors.unschedAccDown %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
@@ -134,7 +152,7 @@
 		<div class="form-group{% if form.errors.unschedUserDown %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="unschedUserDown">{{form.unschedUserDown.label}}</label>
 			<div class="col-sm-2">
-				{{ form.unschedUserDown(class = "form-control", placeholder = "e.g. 8") }}
+				{{ form.unschedUserDown(class = "form-control", placeholder = "e.g. 8") }} hours
 				{% for error in form.errors.unschedUserDown %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
@@ -143,7 +161,7 @@
 		<div class="form-group{% if form.errors.physAvail %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="physAvail">{{form.physAvail.label}}</label>
 			<div class="col-sm-2">
-				{{ form.physAvail(class = "form-control", placeholder = "e.g. 8") }}
+				{{ form.physAvail(class = "form-control", placeholder = "e.g. 8") }} hours
 				{% for error in form.errors.physAvail %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
