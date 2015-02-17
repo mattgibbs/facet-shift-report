@@ -25,7 +25,7 @@ def index(userid = None, username = None):
 		if user:
 			reports = user.reports.order_by('id desc')
 		else:
-			flash('Invalid user group')
+			flash('Invalid experiment ID.')
 			return redirect('index')
 	elif username or request.args.get('userGroup',''):
 		if username:
@@ -37,7 +37,7 @@ def index(userid = None, username = None):
 		if user:
 			return redirect("index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
 		else:
-			flash(username + ' is an invalid user group')
+			flash(username + ' is an invalid experiment name.')
 			return redirect('index')
 	else:
 		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
@@ -101,8 +101,8 @@ def view_report(reportid = None):
 	flash("No report specified. Redirected to root.")
 	return redirect('index')
 
-@app.route('/create_user/', methods=['GET', 'POST'])
-def create_user():
+@app.route('/create_experiment/', methods=['GET', 'POST'])
+def create_experiment():
 	form = UserForm()
 	if form.validate_on_submit():
 		try:
@@ -110,20 +110,20 @@ def create_user():
 			user = models.User(form)
 			db.session.add(user)
 			db.session.commit()
-			flash("Successfully created user " + form.data['userName'])
+			flash("Successfully created experiment " + form.data['userName'])
 		except:
-			flash("Error creating user. Exception " + type(e))
+			flash("Error creating experiment. Exception " + type(e))
 		
-		return redirect('users')
-	return render_template('create_user.html', form=form)
+		return redirect('experiments')
+	return render_template('create_experiment.html', form=form)
 	
-@app.route('/edit_user/<int:userid>', methods=['GET', 'POST'])
-def edit_user(userid = None):
+@app.route('/edit_experiment/<int:userid>', methods=['GET', 'POST'])
+def edit_experiment(userid = None):
 	form = UserForm()
 	try:
 		user = models.User.query.get(userid)
 	except:
-		flash("Error fetching user.  Exception " + type(e))
+		flash("Error fetching experiment.  Exception " + type(e))
 		
 	if form.validate_on_submit():
 		try:
@@ -132,18 +132,18 @@ def edit_user(userid = None):
 			user.read_form(form)
 			print user.name
 			db.session.commit()
-			flash("Successfully updated user " + form.data['userName'])
+			flash("Successfully updated experiment " + form.data['userName'])
 		except:
-			flash("Error editing user.")
+			flash("Error editing experiment.")
 		return redirect('index')
 	else:
 		form.read_user(user)
 		
-	return render_template('edit_user.html', form=form, user=user)
+	return render_template('edit_experiment.html', form=form, user=user)
 	
-@app.route('/users')
-@app.route('/users/')
-def list_users():
+@app.route('/experiments')
+@app.route('/experiments/')
+def list_experiments():
 	users = db.session.query(models.User).order_by('name asc').all()
-	return render_template('list_users.html', users=users)
+	return render_template('list_experiments.html', users=users)
 	

@@ -17,11 +17,11 @@
 						<li class="divider-vertical"></li>
 						<li><a href="{{ url_for('shift_summary_form') }}">New Report</a></li>
 						<li class="divider-vertical"></li>
-            <li><a href="{{ url_for('list_users') }}">Users</a></li>
+            <li><a href="{{ url_for('list_experiments') }}">Experiments</a></li>
 					</ul>
 					<form class="navbar-form pull-right" role="search" action="/index" method="get">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Find by user (e.g. E200)" name="userGroup" id="userGroup">
+							<input type="text" class="form-control" placeholder="Find by experiment name (e.g. E200)" name="userGroup" id="userGroup">
 						</div>
 					</form>
 				</div>
