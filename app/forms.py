@@ -67,7 +67,7 @@ class ShiftForm(Form):
 		choices = [('', 'Please Select')] # Empty string means that required validator returns false
 		users = models.User.query.order_by('name asc').all()
 		for u in users:
-			choices.append((str(u.id), u.name)) # Two parenthesis since the choice pairs are tuples
+			choices.append((str(u.id), u)) # Two parenthesis since the choice pairs are tuples
 		self.user.choices = choices
 
 	def read_report(self, report):
