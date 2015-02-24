@@ -101,4 +101,5 @@ class ShiftReport(db.Model):
 														self.briefSummary, self.other, self.usefulBeam,
 														self.unschedAccDown, self.unschedUserDown, self.physAvail)
 		entry.timestamp = self.postTime
-		entry.submit("facetelog")
+		success_status = entry.submit("facetelog")
+		return success_status

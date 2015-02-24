@@ -67,8 +67,11 @@ def shift_summary_form(reportid = None):
 			return redirect('index')
 			
 		try:
-			report.post_to_logbook()
-			logmessage = "and FACET E-Log entry created."
+			success = report.post_to_logbook()
+			if success:
+				logmessage = "and FACET E-Log entry created."
+			else:
+				logmessage = "but could not create FACET entry."
 		except (HTTPError, ConnectionError):
 			logmessage = "but could not create FACET entry."
 		

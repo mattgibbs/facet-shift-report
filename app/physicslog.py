@@ -44,15 +44,24 @@ class Entry:
 		self.response = r
 		r.raise_for_status()
 		m = re.search('action="(.*?)"',r.text)
-		return m.group(1)
+		if m:
+			return m.group(1)
+		else:
+			return None
+				
 	
 	def submit(self, logname):
 		if self.timestamp == None:
 			self.timestamp = datetime.now()
+		
 		submit_url = self.submission_url(logname, self.timestamp)
+		if submit_url == None:
+			return False
+		
 		xml_filename = re.search('[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}-[0-9]{2}\.xml',submit_url).group(0)
 		self.metainfo = xml_filename
 		r = requests.post(submit_url, files=self.to_dict())
 		self.response = r
 		r.raise_for_status()
+		return True
 		
