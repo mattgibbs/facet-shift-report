@@ -57,9 +57,6 @@ def index(userid = None, username = None):
 			flash('Could not parse end date, displaying all reports.')
 			return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
 		reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
-	
-	start_date_str = start_date.strftime("%Y-%m-%d") if start_date else None
-	end_date_str = end_date.strftime("%Y-%m-%d") if end_date else None
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
 	
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
