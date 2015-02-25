@@ -3,7 +3,7 @@
 <h1>{{ 'FACET Shift Reports' + (' for ' + user.name if user else '') + (" from {0} to {1}".format(start_date, end_date) if (start_date and end_date) else '') }}</h1>
 {% include 'flash.html' %}
 <form class="form-inline" action="{{request.path}}" method="get">
-  <input name="start_date" class="form-control" placeholder="Start Date (YYYY-MM-DD)" value="{{start_date or ''}}"> to <input name="end_date" class="form-control" placeholder="End Date (YYYY-MM-DD)" value="{{end_date or ''}}">
+  <input name="start_date" class="form-control" style="width: 13.6em;" placeholder="Start Date (YYYY-MM-DD)" value="{{start_date or ''}}"> to <input name="end_date" class="form-control" style="width: 13.6em;" placeholder="End Date (YYYY-MM-DD)" value="{{end_date or ''}}">
   {% if user %}
     <input type="hidden" name="userGroup" value="{{user.name}}">
   {% endif %}
