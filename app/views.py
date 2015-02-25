@@ -41,8 +41,6 @@ def index(userid = None, username = None):
 			return redirect('index')
 	else:
 		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
-	for r in reports:
-		print r.id, r.shiftStart, r.user
 	return render_template("index.html", reports=reports, user=user)
 
 
