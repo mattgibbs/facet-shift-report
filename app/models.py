@@ -30,7 +30,6 @@ class ShiftReport(db.Model):
 	
 	# Everything below exists on the Form
 	user			= db.Column(db.Integer, db.ForeignKey('user.id'))
-	shifts			= db.Column(db.String())
 	personnel		= db.Column(db.Text())
 
 	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
@@ -57,7 +56,6 @@ class ShiftReport(db.Model):
 
 	def read_form(self, form):
 		self.user 				= str(form.data['user']) # Form uses strings. I don't think you can pair int/str in the choices
-		self.shifts				= form.data['shifts']
 		self.personnel			= form.data['personnel']
 		self.postTime			= form.data['postTime']
 		self.shiftStart			= form.data['shiftStart']
@@ -78,7 +76,7 @@ class ShiftReport(db.Model):
         
 	def post_to_logbook(self):
 		entry = physicslog.Entry()
-		entry.title = "FACET User Summary for {0} Shift".format(self.shifts)
+		entry.title = "FACET User Summary for {0} to {1}".format(self.shiftStart.strftime("%Y-%m-%d %H:%M"), self.shiftEnd.strftime("%Y-%m-%d %H:%M"))
 		entry.author = self.author.name
 		entry.text = ("__Experiment:__ {0} \r\n" + 
 					"__Personnel:__ {1} \r\n" +

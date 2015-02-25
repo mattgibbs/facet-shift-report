@@ -14,15 +14,6 @@
 				{% endfor %}
 			</div>
 		</div>
-		<div class="form-group{% if form.errors.shifts %} has-error{% endif %}">
-			<label class="col-sm-2 control-label" for="shifts">{{form.shifts.label}}</label>
-			<div class="col-sm-2">
-				{{ form.shifts(class = "form-control") }}
-				{% for error in form.errors.shifts %}
-					<span class="help-inline" style="color: red;">{{error}}</span><br>
-				{% endfor %}
-			</div>
-		</div>
 		<div class="form-group{% if form.errors.personnel %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="personnel">{{form.personnel.label}}</label>
 			<div class="col-sm-4">

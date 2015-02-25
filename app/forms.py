@@ -13,7 +13,6 @@ class UserForm(Form):
 
 class ShiftForm(Form):
 	user 			= fields.SelectField('Experiment', choices=[('error', 'FAILED TO LOAD EXPERIMENTS')], validators=[Required()], default=0)
-	shifts			= fields.SelectField('Shift', choices=[('error', 'FAILED TO LOAD SHIFTS')], validators=[Required()], default=0)
 	personnel		= fields.TextAreaField('Shift Leader/Shift Personnel')
 
 	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
@@ -61,7 +60,6 @@ class ShiftForm(Form):
 	# This is like a weird __init__ since I couldn't get __init__ to work properly
 	def setForm(self):
 		self.setUserChoices()
-		self.setShiftChoices()
 
 	def setUserChoices(self):
 		choices = [('', 'Please Select')] # Empty string means that required validator returns false
@@ -72,7 +70,6 @@ class ShiftForm(Form):
 
 	def read_report(self, report):
 		self.user.data 					= str(report.user) # Must use string for form.
-		self.shifts.data				= report.shifts
 		self.personnel.data				= report.personnel
 		self.postTime.data				= report.postTime
 		self.shiftStart.data			= report.shiftStart
@@ -87,6 +84,4 @@ class ShiftForm(Form):
 		self.unschedAccDown.data		= report.unschedAccDown
 		self.unschedUserDown.data		= report.unschedUserDown
 		self.physAvail.data				= report.physAvail
-
-	def setShiftChoices(self):
-		self.shifts.choices = [('', 'Please Select'), ('Day', 'Day'), ('Swing', 'Swing'), ('Owl', 'Owl')]
+		self.requested_time.data = report.requested_time

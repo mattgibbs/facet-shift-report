@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 {% include 'flash.html' %}
-<h1>Shift Report for {{ report.shifts + " Shift, " + report.shiftStart|datetimeformat('%Y-%m-%d') }}</h1>
+<h1>Shift Report for {{ report.shiftStart|datetimeformat('%Y-%m-%d %H:%M') }} to {{ report.shiftEnd|datetimeformat('%Y-%m-%d %H:%M') }}</h1>
 <dl class="dl-horizontal">
   <dt>Experiment</dt>
   <dd>{{ report.author.name }}</dd>
-  <dt>Shift</dt>
-  <dd>{{ report.shifts }}</dd>
   <dt>Shift Personnel</dt>
   <dd>{{ report.personnel }}</dd>
   <dt>Shift Start Time</dt>
