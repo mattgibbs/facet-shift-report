@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, models
 from forms import ShiftForm, UserForm
-import datetime
+from datetime import datetime
 import nl2br
 import datetimeformat
 from requests import HTTPError
@@ -22,9 +22,7 @@ def index(userid = None, username = None):
 	user = None
 	if userid:
 		user = db.session.query(models.User).get(userid)
-		if user:
-			reports = user.reports.order_by('id desc')
-		else:
+		if user == None:
 			flash('Invalid experiment ID.')
 			return redirect('index')
 	elif username or request.args.get('userGroup',''):
@@ -32,18 +30,38 @@ def index(userid = None, username = None):
 			userToFind = username
 		elif request.args.get('userGroup',''):
 			userToFind = request.args.get('userGroup','')
-		
-		user = db.session.query(models.User).filter(models.User.name == userToFind).all()
-		if user:
-			return redirect("index/" + str(user[0].id))# all() returns a list, but it only has one user group in there.
-		else:
+		user = db.session.query(models.User).filter(models.User.name == userToFind).first()
+		if user == None:
 			flash((username or request.args.get('userGroup','')) + ' is an invalid experiment name.')
-			return redirect('index')
+			return redirect('index')			
+	
+	reports = None
+	if user:
+		reports = db.session.query(models.ShiftReport).filter(models.ShiftReport.user == user.id)
 	else:
-		reports = db.session.query(models.ShiftReport).order_by('id desc').all()#models.ShiftReport.query.order_by('id desc').all()
-	return render_template("index.html", reports=reports, user=user)
-
-
+		reports = db.session.query(models.ShiftReport).order_by('id desc')
+	
+	start_date = None
+	end_date = None
+	start_date_str = request.args.get('start_date')
+	end_date_str = request.args.get('end_date')
+	if start_date_str and end_date_str:
+		try:
+			start_date = datetime.strptime(request.args.get('start_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse start date, displaying all reports.')
+			return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
+		try:
+			end_date = datetime.strptime(request.args.get('end_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse end date, displaying all reports.')
+			return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
+		reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
+	
+	start_date_str = start_date.strftime("%Y-%m-%d") if start_date else None
+	end_date_str = end_date.strftime("%Y-%m-%d") if end_date else None
+	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
+	
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
 @app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
 def shift_summary_form(reportid = None):
