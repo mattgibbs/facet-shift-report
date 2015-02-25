@@ -17,7 +17,7 @@
       <td class="col-sm-2">{{r.author.experiment_title}}</td>
 			<td class="col-sm-4">{{r.briefSummary}}</td>
 			<td class="col-sm-1">
-					<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span></a>
+					<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 			</td>
 		</tr>
 	{% endfor %}
