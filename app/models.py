@@ -91,7 +91,7 @@ class ShiftReport(db.Model):
 					"__Brief Summary:__\r\n{8}\r\n\r\n" +
 					"__Other:__\r\n{9}\r\n\r\n" +
 					"| Useful Beam Time | Accelerator Downtime | User Downtime | Acc Physics Available \r\n" +
-					"| {10} | {11} | {12} | {13}").format(self.author.name, self.personnel, self.shiftStart, self.shiftEnd,
+					"| {10} | {11} | {12} | {13}").format(self.author, self.personnel, self.shiftStart, self.shiftEnd,
 														self.goals, self.progress, self.problems, self.nextShift,
 														self.briefSummary, self.other, self.usefulBeam,
 														self.unschedAccDown, self.unschedUserDown, self.physAvail)
