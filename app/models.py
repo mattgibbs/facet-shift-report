@@ -23,11 +23,6 @@ class User(db.Model):
 		if self.experiment_title:
 			return '%s - %s' % (self.name, self.experiment_title)
 		return self.name
-		
-	def user_choice_str(self):
-		if self.experiment_title:
-			return '%s - %s' % (self.name, self.experiment_title)
-		return self.name
 
 class ShiftReport(db.Model):
 	id				= db.Column(db.Integer, primary_key = True)
