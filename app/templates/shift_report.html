@@ -26,7 +26,7 @@
 		<div class="form-group{% if form.errors.postTime %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="postTime">{{form.postTime.label}}</label>
 			<div class="col-sm-4">
-				{{ form.postTime(class = "form-control") }}
+				{{ form.postTime(class = "form-control", placeholder = "YYYY-MM-DD HH:MM:SS") }}
 				{% for error in form.errors.postTime %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
@@ -35,7 +35,7 @@
 		<div class="form-group{% if form.errors.shiftStart %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="shiftStart">{{form.shiftStart.label}}</label>
 			<div class="col-sm-4">
-				{{ form.shiftStart(class = "form-control") }}
+				{{ form.shiftStart(class = "form-control", placeholder = "YYYY-MM-DD HH:MM:SS") }}
 				{% for error in form.errors.shiftStart %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}
@@ -44,7 +44,7 @@
 		<div class="form-group{% if form.errors.shiftEnd %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="shiftEnd">{{form.shiftEnd.label}}</label>
 			<div class="col-sm-4">
-				{{ form.shiftEnd(class = "form-control") }}
+				{{ form.shiftEnd(class = "form-control", placeholder = "YYYY-MM-DD HH:MM:SS") }}
 				{% for error in form.errors.shiftEnd %}
 					<span class="help-inline" style="color: red;">{{error}}</span><br>
 				{% endfor %}

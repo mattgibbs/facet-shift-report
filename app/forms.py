@@ -17,8 +17,8 @@ class ShiftForm(Form):
 
 	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
 	postTime		= fields.DateTimeField('Time to Post to E-Log', default=datetime.now, format="%Y-%m-%d %H:%M:%S", validators=[Required()])
-	shiftStart		= fields.DateTimeField('Shift Start Time', default=datetime.now, format="%Y-%m-%d %H:%M:%S", validators=[Required()])
-	shiftEnd		= fields.DateTimeField('Shift End Time', default=datetime.now, format="%Y-%m-%d %H:%M:%S", validators=[Required()])
+	shiftStart		= fields.DateTimeField('Shift Start Time', format="%Y-%m-%d %H:%M:%S", validators=[Required()])
+	shiftEnd		= fields.DateTimeField('Shift End Time', format="%Y-%m-%d %H:%M:%S", validators=[Required()])
 
 	goals			= fields.TextAreaField('Goals')
 	progress		= fields.TextAreaField('Progress')
