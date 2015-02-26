@@ -1,9 +1,11 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, Response
+from functools import wraps
 from app import app, db, models
 from forms import ShiftForm, UserForm
 from datetime import datetime
 import nl2br
 import datetimeformat
+import secrets
 from requests import HTTPError
 from requests import ConnectionError
 
@@ -16,9 +18,10 @@ def root_index():
 	return redirect('index')
 
 @app.route('/index')
+@app.route('/index/')
 @app.route('/index/<int:userid>')
 @app.route('/index/<username>/')
-def index(userid = None, username = None):
+def index(userid = None, username = None, admin=False):
 	user = None
 	if userid:
 		user = db.session.query(models.User).get(userid)
@@ -60,14 +63,14 @@ def index(userid = None, username = None):
 			reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
 
 	#Unless the user requests seeing everything, don't include hidden reports.
-	if (request.args.get('show_hidden') == None) or (request.args.get('show_hidden').lower() != "true"):
+	if ((request.args.get('show_hidden') == None) or (request.args.get('show_hidden').lower() != "true")) and not admin:
 		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
 		reports = reports.except_(hidden_reports)
 	
 	#Always order the reports by id
 	reports = reports.order_by('shift_report_id desc')
 	
-	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
+	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
 	
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
 @app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
@@ -116,11 +119,11 @@ def shift_summary_form(reportid = None):
 @app.route('/view_report')
 @app.route('/view_report/')
 @app.route('/view_report/<int:reportid>')
-def view_report(reportid = None):
+def view_report(reportid = None, admin=False):
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
 		if report:
-			return render_template('view_report.html', report=report)
+			return render_template('view_report.html', report=report, admin=admin)
 		else:
 			flash("Failed to load report #" + str(reportid) + ". Report does not exist.")
 			return redirect('index')
@@ -173,3 +176,82 @@ def list_experiments():
 	users = db.session.query(models.User).order_by('name asc').all()
 	return render_template('list_experiments.html', users=users)
 	
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    return username == secrets.admin_username and password == secrets.admin_password
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response(
+    'Could not verify your access level for that URL.\n'
+    'You have to login with proper credentials', 401,
+    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
+		
+@app.route('/admin/index')
+@app.route('/admin/index/')
+@app.route('/admin/index/<int:userid>')
+@app.route('/admin/index/<username>/')
+@requires_auth
+def admin_index(userid = None, username = None):
+	return index(userid = userid, username = username, admin=True)
+	
+@app.route('/admin/view_report/<int:reportid>')
+@requires_auth
+def admin_view_report(reportid = None):
+	return view_report(reportid = reportid, admin=True)
+
+@app.route('/admin/toggle_report_hidden/<int:reportid>')
+@requires_auth
+def admin_toggle_report_hidden(reportid = None):
+	if reportid:
+		report = db.session.query(models.ShiftReport).get(reportid)
+		if report:
+			#Hide or show the report
+			if report.hidden:
+				report.hidden = False
+			else:
+				report.hidden = True
+			db.session.commit()
+			flash("Report hidden." if report.hidden else "Report shown.")
+			if request.args.get('next') == 'index':
+				return redirect(url_for('admin_index'))
+			elif request.args.get('next'):
+				userid = int(request.args.get('next'))
+				return redirect(url_for('admin_index', userid=userid))
+			return redirect(url_for('admin_view_report', reportid = report.id))
+		else:
+			abort(404)
+	flash("No report specified. Redirected to admin page.")
+	return redirect(url_for('admin_index'))
+
+@app.route('/admin/delete_report/<int:reportid>')
+@requires_auth
+def admin_delete_report(reportid = None):
+	if reportid:
+		report = db.session.query(models.ShiftReport).get(reportid)
+		if report:
+			#Delete the report
+			db.session.delete(report)
+			db.session.commit()
+			flash("Report deleted.")
+			if request.args.get('next') == 'index':
+				return redirect(url_for('admin_index'))
+			elif request.args.get('next'):
+				userid = int(request.args.get('next'))
+				return redirect(url_for('admin_index', userid=userid))
+			return redirect(url_for('admin_index'))
+		else:
+			abort(404)
+	flash("No report specified. Redirected to admin page.")
+	return redirect(url_for('admin_index'))

@@ -11,3 +11,4 @@ app/__init__.pyc
 app/forms.pyc
 app/views.pyc
 config.pyc
+secrets.py
