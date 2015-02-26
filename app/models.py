@@ -49,8 +49,11 @@ class ShiftReport(db.Model):
 	unschedUserDown	= db.Column(db.Float)
 	physAvail		= db.Column(db.Float)
 	requested_time = db.Column(db.Float)
+	
+	hidden = db.Column(db.Boolean())
 
 	def __init__(self, form=None):
+		self.hidden = False
 		if form:
 			self.read_form(form)
 

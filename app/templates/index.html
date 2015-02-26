@@ -18,7 +18,7 @@
 		<th class="col-sm-1">Edit</th>
 	</tr>
 	{% for r in reports %}
-		<tr>
+		<tr class="{{'hidden-report' if r.hidden else 'report'}}">
 			<td class="col-sm-2"><a href="{{ url_for('view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
 			<td class="col-sm-1"><a href="{{ url_for('index', userid=r.author.id) }}">{{r.author.name}}</a></td>
       <td class="col-sm-2">{{r.author.experiment_title}}</td>

@@ -33,5 +33,9 @@
   <dd>{{ report.unschedUserDown }}</dd>
   <dt>Accelerator Physics Available</dt>
   <dd>{{ report.physAvail }}</dd>
+	{% if report.hidden %}
+	  <dt>Hidden</dt>
+	  <dd>Yes</dd>
+	{% endif %}
 </dl>
 {% endblock %}

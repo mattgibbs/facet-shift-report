@@ -1,0 +1,4 @@
+tr.hidden-report {
+	opacity: 0.5;
+	filter:Alpha(opacity=50);
+}

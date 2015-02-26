@@ -35,12 +35,14 @@ def index(userid = None, username = None):
 			flash((username or request.args.get('userGroup','')) + ' is an invalid experiment name.')
 			return redirect('index')			
 	
+  #If there is a user specified, get their reports, otherwise, just get all reports.
 	reports = None
 	if user:
 		reports = db.session.query(models.ShiftReport).filter(models.ShiftReport.user == user.id)
 	else:
-		reports = db.session.query(models.ShiftReport).order_by('id desc')
+		reports = db.session.query(models.ShiftReport)
 	
+  #If there is a start and end date specified, only get reports between those dates.
 	start_date = None
 	end_date = None
 	start_date_str = request.args.get('start_date')
@@ -49,14 +51,22 @@ def index(userid = None, username = None):
 		try:
 			start_date = datetime.strptime(request.args.get('start_date'),"%Y-%m-%d")
 		except ValueError:
-			flash('Could not parse start date, displaying all reports.')
-			return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
+			flash('Could not parse start date, ignoring date filter.')
 		try:
 			end_date = datetime.strptime(request.args.get('end_date'),"%Y-%m-%d")
 		except ValueError:
-			flash('Could not parse end date, displaying all reports.')
-			return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
-		reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
+			flash('Could not parse end date, ignoring date filter.')
+		if start_date and end_date:
+			reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
+
+	#Unless the user requests seeing everything, don't include hidden reports.
+	if (request.args.get('show_hidden') == None) or (request.args.get('show_hidden').lower() != "true"):
+		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
+		reports = reports.except_(hidden_reports)
+	
+	#Always order the reports by id
+	reports = reports.order_by('shift_report_id desc')
+	
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str)
 	
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
