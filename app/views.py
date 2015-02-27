@@ -147,31 +147,7 @@ def create_experiment():
 		
 		return redirect('experiments')
 	return render_template('create_experiment.html', form=form)
-	
-@app.route('/edit_experiment/<int:userid>', methods=['GET', 'POST'])
-def edit_experiment(userid = None):
-	form = UserForm()
-	try:
-		user = models.User.query.get(userid)
-	except:
-		flash("Error fetching experiment.  Exception " + type(e))
 		
-	if form.validate_on_submit():
-		try:
-			# TODO check that user doesn't already exist
-			print form.userName.data
-			user.read_form(form)
-			print user.name
-			db.session.commit()
-			flash("Successfully updated experiment " + form.data['userName'])
-		except:
-			flash("Error editing experiment.")
-		return redirect('index')
-	else:
-		form.read_user(user)
-		
-	return render_template('edit_experiment.html', form=form, user=user)
-	
 @app.route('/experiments')
 @app.route('/experiments/')
 def list_experiments():
@@ -199,7 +175,32 @@ def requires_auth(f):
             return authenticate()
         return f(*args, **kwargs)
     return decorated
+
+@app.route('/edit_experiment/<int:userid>', methods=['GET', 'POST'])
+@requires_auth
+def edit_experiment(userid = None):
+	form = UserForm()
+	try:
+		user = models.User.query.get(userid)
+	except:
+		flash("Error fetching experiment.  Exception " + type(e))
 		
+	if form.validate_on_submit():
+		try:
+			# TODO check that user doesn't already exist
+			print form.userName.data
+			user.read_form(form)
+			print user.name
+			db.session.commit()
+			flash("Successfully updated experiment " + form.data['userName'])
+		except:
+			flash("Error editing experiment.")
+		return redirect(url_for('list_experiments'))
+	else:
+		form.read_user(user)
+		
+	return render_template('edit_experiment.html', form=form, user=user)
+
 @app.route('/admin/index')
 @app.route('/admin/index/')
 @app.route('/admin/index/<int:userid>')
