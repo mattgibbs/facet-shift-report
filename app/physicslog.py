@@ -63,5 +63,7 @@ class Entry:
 		r = requests.post(submit_url, files=self.to_dict())
 		self.response = r
 		r.raise_for_status()
-		return True
+		entry_url = "http://physics-elog.slac.stanford.edu/{0}/show.jsp?dir=/{1}/{2}/{3}.{4}&pos={5}"
+		week = str(int(timestamp.strftime('%W'))+1).zfill(2)
+		return entry_url.format(logname, self.timestamp.strftime('%Y'), week, self.timestamp.strftime('%d'), self.timestamp.strftime('%m'), self.timestamp.strftime('%Y-%m-%dT%H:%M:%S'))
 		
