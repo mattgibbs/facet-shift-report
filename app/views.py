@@ -131,22 +131,6 @@ def view_report(reportid = None, admin=False):
 			return redirect('index')
 	flash("No report specified. Redirected to root.")
 	return redirect('index')
-
-@app.route('/create_experiment/', methods=['GET', 'POST'])
-def create_experiment():
-	form = UserForm()
-	if form.validate_on_submit():
-		try:
-			# TODO check that user doesn't already exist
-			user = models.User(form)
-			db.session.add(user)
-			db.session.commit()
-			flash("Successfully created experiment " + form.data['userName'])
-		except:
-			flash("Error creating experiment. Exception " + type(e))
-		
-		return redirect('experiments')
-	return render_template('create_experiment.html', form=form)
 		
 @app.route('/experiments')
 @app.route('/experiments/')
@@ -175,6 +159,23 @@ def requires_auth(f):
             return authenticate()
         return f(*args, **kwargs)
     return decorated
+		
+@app.route('/create_experiment/', methods=['GET', 'POST'])
+@requires_auth
+def create_experiment():
+	form = UserForm()
+	if form.validate_on_submit():
+		try:
+			# TODO check that user doesn't already exist
+			user = models.User(form)
+			db.session.add(user)
+			db.session.commit()
+			flash("Successfully created experiment " + form.data['userName'])
+		except:
+			flash("Error creating experiment. Exception " + type(e))
+		
+		return redirect('experiments')
+	return render_template('create_experiment.html', form=form)
 
 @app.route('/edit_experiment/<int:userid>', methods=['GET', 'POST'])
 @requires_auth
