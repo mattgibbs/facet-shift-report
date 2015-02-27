@@ -68,7 +68,7 @@ def index(userid = None, username = None, admin=False):
 		reports = reports.except_(hidden_reports)
 	
 	#Always order the reports by id
-	reports = reports.order_by('shift_report_id desc')
+	reports = reports.order_by('shift_report_shiftEnd desc')
 	
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
 	
