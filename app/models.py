@@ -52,6 +52,7 @@ class ShiftReport(db.Model):
 	requested_time = db.Column(db.Float)
 	
 	hidden = db.Column(db.Boolean())
+	logbook_entry_url = db.Column(db.String(140))
 
 	def __init__(self, form=None):
 		self.hidden = False

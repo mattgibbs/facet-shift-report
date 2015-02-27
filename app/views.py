@@ -95,6 +95,8 @@ def shift_summary_form(reportid = None):
 		try:
 			success = report.post_to_logbook()
 			if success:
+				report.logbook_entry_url = success
+				db.session.commit()
 				logmessage = "and FACET E-Log entry created."
 			else:
 				logmessage = "but could not create FACET entry."
