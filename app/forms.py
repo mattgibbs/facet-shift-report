@@ -33,29 +33,13 @@ class ShiftForm(Form):
 	unschedUserDown	= fields.DecimalField('Unscheduled User Downtime')
 	physAvail		= fields.DecimalField('Accelerator Physics Group Support Available')
 	requested_time = fields.DecimalField('Beam Time Requested')
-	''' Unsure how I want to add the following:
-	s2chargeDeliv	= fields.DecimalField('')
-	s2chargeReq		= fields.DecimalField('')
-	s10chargeDeliv	= fields.DecimalField('')
-	s10chargeReq	= fields.DecimalField('')
-	s19chargeDeliv	= fields.DecimalField('')
-	s19chargeReq	= fields.DecimalField('')
-	s20chargeDeliv	= fields.DecimalField('')
-	s20chargeReq	= fields.DecimalField('')
-	scavchargeDeliv	= fields.DecimalField('')
-	scavchargeReq	= fields.DecimalField('')
+
+	usesPositrons = fields.SelectField('Particle Type', choices=[("False", 'Electrons'), ("True", 'Positrons')], default = "False")
+	numParticles = fields.DecimalField('Bunch Charge')
+	x_rms_li20 = fields.DecimalField('X RMS Wire Size (&mu;m)')
+	y_rms_li20 = fields.DecimalField('Y RMS Wire Size (&mu;m)')
+	bunch_length = fields.DecimalField('Bunch Length (&mu;m)')
 	
-	s2emitDeliv		= fields.DecimalField('')
-	s2emitReq		= fields.DecimalField('')
-	s4emitDeliv		= fields.DecimalField('')
-	s4emitReq		= fields.DecimalField('')
-	s11emitDeliv	= fields.DecimalField('')
-	s11emitReq		= fields.DecimalField('')
-	s18emitDeliv	= fields.DecimalField('')
-	s18emitReq		= fields.DecimalField('')
-	s20emitDeliv	= fields.DecimalField('')
-	s20emitReq		= fields.DecimalField('')
-	'''
 
 	# This is like a weird __init__ since I couldn't get __init__ to work properly
 	def setForm(self):
@@ -85,3 +69,8 @@ class ShiftForm(Form):
 		self.unschedUserDown.data		= report.unschedUserDown
 		self.physAvail.data				= report.physAvail
 		self.requested_time.data = report.requested_time
+		self.usesPositrons.data = "True" if report.usesPositrons else "False"
+		self.numParticles.data = report.numParticles
+		self.x_rms_li20.data = report.x_rms_li20
+		self.y_rms_li20.data = report.y_rms_li20
+		self.bunch_length.data = report.bunch_length

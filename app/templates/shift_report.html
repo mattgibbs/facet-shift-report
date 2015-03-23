@@ -122,6 +122,67 @@
 				{% endfor %}
 			</div>
 		</div>
+		<div class="form-group{% if form.errors.usesPositrons %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.usesPositrons.label }}</div>
+        <div class="help-block">Matter or Antimatter?</div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.usesPositrons(class = "form-control") }}
+				{% for error in form.errors.usesPositrons %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group{% if form.errors.numParticles %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.numParticles.label }}</div>
+        <div class="help-block">Bunch charge in LI20, in number of particles.</div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.numParticles(class = "form-control") }} x10<sup>10</sup> particles
+				{% for error in form.errors.numParticles %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group{% if form.errors.x_rms_li20 %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.x_rms_li20.label }}</div>
+        <div class="help-block">Horizontal beam size, as measured at WSIP2.</div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.x_rms_li20(class = "form-control") }} &mu;m
+				{% for error in form.errors.x_rms_li20 %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group{% if form.errors.y_rms_li20 %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.y_rms_li20.label }}</div>
+        <div class="help-block">Vertical beam size, as measured at WSIP2.</div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.y_rms_li20(class = "form-control") }} &mu;m
+				{% for error in form.errors.y_rms_li20 %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="form-group{% if form.errors.bunch_length %} has-error{% endif %}">
+      <div class="col-sm-2 control-label">
+			  <div>{{ form.bunch_length.label }}</div>
+        <div class="help-block">Bunch length, as measured by the XTCAV.</div>
+      </div>
+			<div class="col-sm-2">
+				{{ form.bunch_length(class = "form-control") }} &mu;m
+				{% for error in form.errors.bunch_length %}
+					<span class="help-inline" style="color: red;">{{error}}</span><br>
+				{% endfor %}
+			</div>
+		</div>
+		
 		<div class="form-group{% if form.errors.usefulBeam %} has-error{% endif %}">
       <div class="col-sm-2 control-label">
 			  <div>{{ form.requested_time.label }}</div>

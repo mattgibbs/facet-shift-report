@@ -77,6 +77,11 @@ class ShiftReport(db.Model):
 		self.nextShift			= form.data['nextShift']
 		self.briefSummary		= form.data['briefSummary']
 		self.other				= form.data['other']
+		self.usesPositrons = (form.data['usesPositrons'] == "True")
+		self.numParticles = form.data['numParticles']
+		self.x_rms_li20 = form.data['x_rms_li20']
+		self.y_rms_li20 = form.data['y_rms_li20']
+		self.bunch_length = form.data['bunch_length']
 		self.usefulBeam			= form.data['usefulBeam']
 		self.unschedAccDown		= form.data['unschedAccDown']
 		self.unschedUserDown	= form.data['unschedUserDown']
