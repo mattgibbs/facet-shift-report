@@ -76,7 +76,7 @@
 <div class="ms-rteStyle-Highlight"><strong>Shift Start:</strong> {{ report.shiftStart }}</div></td></tr>
 <tr class="ms-rteTableOddRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Requested Beam Time (hours)​:</strong>​</td>
 <td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">{{ report.requested_time }}​​</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Charge delivered in S20 (10**10 electrons/bunch):</strong>​</td>
+<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Charge delivered in S20 (10**10 {{'positrons' if report.usesPositrons else 'electrons' }}/bunch):</strong>​</td>
 <td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">​{{ report.numParticles }}</td></tr>
 <tr class="ms-rteTableEvenRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>​Useful Beam Time (hours):</strong></td>
 <td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">{{ report.usefulBeam }}​</td>
