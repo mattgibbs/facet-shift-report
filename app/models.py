@@ -51,6 +51,12 @@ class ShiftReport(db.Model):
 	physAvail		= db.Column(db.Float)
 	requested_time = db.Column(db.Float)
 	
+	usesPositrons = db.Column(db.Boolean, default = False)
+	numParticles = db.Column(db.Float)
+	x_emittance_li20 = db.Column(db.Float)
+	y_emittance_li20 = db.Column(db.Float)
+	bunch_length = db.Column(db.Float)
+	
 	hidden = db.Column(db.Boolean())
 	logbook_entry_url = db.Column(db.String(140))
 
