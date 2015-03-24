@@ -17,7 +17,7 @@
 <td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>Bunch length (rms, microns)​:</strong>​</td>
 <td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">{{ report.bunch_length }}​​</td></tr>
 <tr class="ms-rteTableOddRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Total delivered+downtime+user off (hours):​</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right"><strong>​</strong>{{ report.unschedUserDown + report.usefulBeam + report.unschedAccDown }} </td>
+<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right"><strong>​</strong>{{ report.totalHours() }} </td>
 <td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>​</strong></td>
 <td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px"><strong>​</strong></td></tr>
 <tr class="ms-rteTableEvenRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>% time accelerator support physicist available:</strong>​​</td>
