@@ -6,6 +6,7 @@ from datetime import datetime
 import nl2br
 import datetimeformat
 import secrets
+import os.path
 from requests import HTTPError
 from requests import ConnectionError
 
@@ -70,7 +71,23 @@ def index(userid = None, username = None, admin=False):
 	#Always order the reports by end date
 	reports = reports.order_by('shift_report_shiftEnd desc')
 	
+	#Determine if this is a CSV request.  If so, we'll return CSV for the report.
+	path, extension = os.path.splitext(request.base_url)
+	print(request.base_url)
+	if extension == ".csv":
+		def generate_csv_row():
+			yield ','.join(['Experiment', 'Hours Delivered', 'Hours Requested', 'Hours Accelerator Down', 'Hours User Off', 'Hours Total']) + '\n'
+			for report in reports:
+				yield ','.join([str(report.author), str(report.usefulBeam), str(report.requested_time), str(report.unschedAccDown), str(report.unschedUserDown), str(report.totalHours())]) + '\n'
+		return Response(generate_csv_row(), mimetype='text/csv')
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
+
+@app.route('/index.csv')
+@app.route('/index/<int:userid>.csv')
+@app.route('/index/<username>.csv')
+def csv_index(userid = None, username = None):
+	return index(userid, username)
+
 
 @app.route('/summaries/', methods=['GET'])
 def summaries():
