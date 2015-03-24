@@ -67,11 +67,72 @@ def index(userid = None, username = None, admin=False):
 		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
 		reports = reports.except_(hidden_reports)
 	
-	#Always order the reports by id
+	#Always order the reports by end date
 	reports = reports.order_by('shift_report_shiftEnd desc')
 	
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
+
+@app.route('/summaries/', methods=['GET'])
+def summaries():
+  #If there is a start and end date specified, only get reports between those dates.
+	start_date = None
+	end_date = None
+	start_date_str = request.args.get('start_date')
+	end_date_str = request.args.get('end_date')
+	reports = db.session.query(models.ShiftReport)
+	if start_date_str and end_date_str:
+		try:
+			start_date = datetime.strptime(request.args.get('start_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse start date, ignoring date filter.')
+		try:
+			end_date = datetime.strptime(request.args.get('end_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse end date, ignoring date filter.')
+		if start_date and end_date:
+			reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
+
+	#Unless the user requests seeing everything, don't include hidden reports.
+	if ((request.args.get('show_hidden') == None) or (request.args.get('show_hidden').lower() != "true")):
+		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
+		reports = reports.except_(hidden_reports)
 	
+	#Always order the reports by id
+	reports = reports.order_by('shift_report_shiftEnd desc')
+	
+	return render_template("summaries.html", reports=reports, start_date=start_date_str, end_date=end_date_str)
+
+@app.route('/summaries/raw/', methods=['GET'])
+def raw_summaries():
+  #If there is a start and end date specified, only get reports between those dates.
+	start_date = None
+	end_date = None
+	start_date_str = request.args.get('start_date')
+	end_date_str = request.args.get('end_date')
+	reports = db.session.query(models.ShiftReport)
+	if start_date_str and end_date_str:
+		try:
+			start_date = datetime.strptime(request.args.get('start_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse start date, ignoring date filter.')
+		try:
+			end_date = datetime.strptime(request.args.get('end_date'),"%Y-%m-%d")
+		except ValueError:
+			flash('Could not parse end date, ignoring date filter.')
+		if start_date and end_date:
+			reports = reports.filter(models.ShiftReport.shiftEnd.between(start_date, end_date))
+
+	#Unless the user requests seeing everything, don't include hidden reports.
+	if ((request.args.get('show_hidden') == None) or (request.args.get('show_hidden').lower() != "true")):
+		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
+		reports = reports.except_(hidden_reports)
+	
+	#Always order the reports by id
+	reports = reports.order_by('shift_report_shiftEnd desc')
+	return render_template("raw_summaries.html", reports=reports, start_date = start_date_str, end_date = end_date_str)
+		
+
+
 @app.route('/shift_summary_form/', methods=['GET', 'POST'])
 @app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
 def shift_summary_form(reportid = None):

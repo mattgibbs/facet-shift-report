@@ -2,3 +2,21 @@ tr.hidden-report td{
 	opacity: 0.5;
 	filter:Alpha(opacity=50);
 }
+
+ul.summarylist {
+	list-style-type: none;
+	margin-top: 10px;
+	padding-left: 0px;
+}
+
+ul.summarylist li {
+	padding-right: 0px;
+	padding-left: 0px;
+	border-bottom: 1px solid #d3d3d3;
+	margin-bottom: 20px;
+}
+
+textarea#summaries {
+	width: 100%;
+	height: 100%;
+}

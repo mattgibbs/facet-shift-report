@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ 'FACET Shift Report Summaries' + (" from {0} to {1}".format(start_date, end_date) if (start_date and end_date) else '') }}</h1>
+{% include 'flash.html' %}
+<form class="form-inline" action="{{request.script_root + request.path}}" method="get">
+  <input name="start_date" class="form-control" style="width: 13.6em;" placeholder="Start Date (YYYY-MM-DD)" value="{{start_date or ''}}"> to <input name="end_date" class="form-control" style="width: 13.6em;" placeholder="End Date (YYYY-MM-DD)" value="{{end_date or ''}}">
+  <input type="submit" class="btn btn-default" value="Filter by date">
+</form>
+<div class="center-block">
+	<a class="btn btn-default" href="{{ url_for('raw_summaries', start_date=start_date, end_date=end_date) }}">View as raw HTML</a>
+</div>
+<ul class="summarylist">
+	{% for report in reports %}
+	<li>
+		{% include 'report_summary_table.html' %}
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
