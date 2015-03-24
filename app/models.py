@@ -64,6 +64,12 @@ class ShiftReport(db.Model):
 		self.hidden = False
 		if form:
 			self.read_form(form)
+			
+	def physAvailPercentage(self):
+		totalTime = self.unschedUserDown + self.usefulBeam + self.unschedAccDown
+		if totalTime > 0:
+			return self.physAvail / (self.unschedUserDown + self.usefulBeam + self.unschedAccDown)
+		return "Not Available"
 
 	def read_form(self, form):
 		self.user 				= str(form.data['user']) # Form uses strings. I don't think you can pair int/str in the choices
