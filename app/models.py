@@ -58,6 +58,7 @@ class ShiftReport(db.Model):
 	bunch_length = db.Column(db.Float)
 	
 	hidden = db.Column(db.Boolean())
+	submitted = db.Column(db.Boolean(), default = False)
 	logbook_entry_url = db.Column(db.String(140))
 
 	def __init__(self, form=None):
