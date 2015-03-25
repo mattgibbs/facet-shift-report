@@ -18,7 +18,8 @@
 		<th class="col-sm-2">Date</th>
 		<th class="col-sm-1">Experiment</th>
     <th class="col-sm-2">Experiment Title</th>
-		<th class="col-sm-4">Brief Summary</th>
+		<th class="col-sm-3">Brief Summary</th>
+		<th class="col-sm-1">Submitted</th>
 		<th class="col-sm-1">Edit</th>
 		{% if admin %}
 		<th class="col-sm-1"></th>
@@ -30,9 +31,14 @@
 			<td class="col-sm-2"><a href="{{ url_for('admin_view_report' if admin else 'view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
 			<td class="col-sm-1"><a href="{{ url_for('admin_index' if admin else 'index', userid=r.author.id) }}">{{r.author.name}}</a></td>
       <td class="col-sm-2">{{r.author.experiment_title}}</td>
-			<td class="col-sm-4">{{r.briefSummary}}</td>
+			<td class="col-sm-3">{{r.briefSummary}}</td>
 			<td class="col-sm-1">
-					<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+				{{ "Yes" if r.submitted else "No" }}
+			</td>
+			<td class="col-sm-1">
+				{% if not r.submitted or admin %}
+				<a href="{{ url_for('shift_summary_form', reportid=r.id) }}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+				{% endif %}
 			</td>
 			{% if admin %}
 				<td class="col-sm-1" style="opacity: 1.0;"><a href="{{ url_for('admin_toggle_report_hidden', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-warning">{{ 'Show' if r.hidden else 'Hide' }}</a></td>

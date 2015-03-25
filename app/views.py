@@ -150,39 +150,11 @@ def raw_summaries():
 		
 
 
-@app.route('/shift_summary_form/', methods=['GET', 'POST'])
-@app.route('/shift_summary_form/<int:reportid>', methods=['GET', 'POST'])
+@app.route('/shift_summary_form/', methods=['GET'])
+@app.route('/shift_summary_form/<int:reportid>', methods=['GET'])
 def shift_summary_form(reportid = None):
 	form = ShiftForm()
 	form.setForm()
-	if form.validate_on_submit():
-		if reportid:
-			report = models.ShiftReport.query.get(reportid)
-			report.read_form(form)
-		else:
-			report = models.ShiftReport(form)
-			db.session.add(report)
-			
-		try:
-			db.session.commit()
-			dbmessage = "Successfully uploaded to database, "
-		except:
-			flash("Could not create shift report.")
-			return redirect('index')
-			
-		try:
-			success = report.post_to_logbook()
-			if success:
-				report.logbook_entry_url = success
-				db.session.commit()
-				logmessage = "and FACET E-Log entry created."
-			else:
-				logmessage = "but could not create FACET entry."
-		except (HTTPError, ConnectionError):
-			logmessage = "but could not create FACET entry."
-		
-		flash(dbmessage + logmessage)
-		return redirect('index')
 	if reportid:
 		report = models.ShiftReport.query.get(reportid)
 		if report:
@@ -193,8 +165,64 @@ def shift_summary_form(reportid = None):
 		else:
 			# Report ID does not exist
 			flash("Report does not exist")
-			return redirect('shift_summary_form/')
-	return render_template('shift_report.html', form=form)
+			return redirect(url_for('shift_summary_form'))
+	return render_template('shift_report.html', form=form, reportid=reportid)
+
+@app.route('/save_shift_form/', methods=['POST'])
+@app.route('/save_shift_form/<int:reportid>', methods=['POST'])
+def save_shift_form(reportid = None):
+	form = ShiftForm()
+	form.setForm()
+	if reportid:
+		report = models.ShiftReport.query.get(reportid)
+		report.read_form(form)
+	else:
+		report = models.ShiftReport(form)
+		db.session.add(report)
+	
+	try:
+		db.session.commit()
+		flash("Shift report saved.")
+		return redirect(url_for('shift_summary_form', reportid = report.id))
+	except: 
+		flash("Could not save shift report.")
+		return render_template('shift_report.html', form=form)
+
+@app.route('/submit_shift_form/', methods=['POST'])
+@app.route('/submit_shift_form/<int:reportid>', methods=['POST'])
+def submit_shift_form(reportid = None):
+	form = ShiftForm()
+	form.setForm()
+	if form.validate_on_submit():
+		if reportid:
+			report = models.ShiftReport.query.get(reportid)
+			report.read_form(form)
+		else:
+			report = models.ShiftReport(form)
+			db.session.add(report)
+		try:
+			db.session.commit()
+			dbmessage = "Successfully uploaded to database, "
+		except:
+			flash("Could not submit shift report.")
+			if reportid:
+				return redirect(url_for('shift_summary_form', reportid=reportid))
+			return render_template('shift_report.html', form=form)
+			
+		try:
+			new_entry_url = report.post_to_logbook()
+			if new_entry_url:
+				report.logbook_entry_url = new_entry_url
+				report.submitted = True
+				db.session.commit()
+				logmessage = "and FACET E-Log entry created."
+			else:
+				logmessage = "but could not create FACET entry."
+		except (HTTPError, ConnectionError):
+			logmessage = "but could not create FACET entry."
+		flash(dbmessage + logmessage)
+		return redirect('index')
+	return redirect(url_for('shift_summary_form', reportid = reportid))
 
 @app.route('/view_report')
 @app.route('/view_report/')
