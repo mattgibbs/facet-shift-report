@@ -112,14 +112,21 @@ class ShiftReport(db.Model):
 					"__Problems:__\r\n{6}\r\n\r\n" +
 					"__To Do Next Shift:__\r\n{7}\r\n\r\n" +
 					"__Brief Summary:__\r\n{8}\r\n\r\n" +
-					"__Other:__\r\n{9}\r\n\r\n" +
+					"__Other Notes:__\r\n{9}\r\n\r\n" +
+					"__Particle Type:__ {15}\r\n" +
+					"__Bunch Charge:__ {16}x10^10 particles\r\n" +
+					"__LI20 Horizontal Beam Size:__ {17} um\r\n" +
+					"__LI20 Vertical Beam Size:__ {18} um\r\n" +
+					"__Bunch Length:__ {19} um\r\n" +
 					"| Useful Beam Time | Accelerator Downtime | User Downtime | Acc Physics Available \r\n" +
 					"| {10} | {11} | {12} | {13} \r\n\r\n" + 
 					"View this report in the FACET Shift Reports system: {14}").format(self.author, self.personnel, self.shiftStart, self.shiftEnd,
 														self.goals, self.progress, self.problems, self.nextShift,
 														self.briefSummary, self.other, self.usefulBeam,
 														self.unschedAccDown, self.unschedUserDown, self.physAvail,
-														url_for('view_report', reportid=self.id, _external=True))
+														url_for('view_report', reportid=self.id, _external=True),
+														"Positrons" if self.usesPositrons else "Electrons",
+														self.numParticles, self.x_rms_li20, self.y_rms_li20, self.bunch_length)
 		entry.timestamp = self.postTime
 		success_status = entry.submit("facetelog")
 		return success_status
