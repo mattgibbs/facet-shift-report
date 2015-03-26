@@ -75,11 +75,7 @@ def index(userid = None, username = None, admin=False):
 	path, extension = os.path.splitext(request.base_url)
 	print(request.base_url)
 	if extension == ".csv":
-		def generate_csv_row():
-			yield ','.join(['Experiment', 'Hours Delivered', 'Hours Requested', 'Hours Accelerator Down', 'Hours User Off', 'Hours Total']) + '\n'
-			for report in reports:
-				yield ','.join([str(report.author), str(report.usefulBeam), str(report.requested_time), str(report.unschedAccDown), str(report.unschedUserDown), str(report.totalHours())]) + '\n'
-		return Response(generate_csv_row(), mimetype='text/csv')
+		return Response(generate_csv_for_reports(reports), mimetype='text/csv')
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
 
 @app.route('/index.csv')
@@ -370,3 +366,25 @@ def admin_delete_report(reportid = None):
 			abort(404)
 	flash("No report specified. Redirected to admin page.")
 	return redirect(url_for('admin_index'))
+	
+	
+def generate_csv_for_reports(reports):
+	output_rows = ['Totals',','.join(['Experiment', 'Hours Delivered', 'Hours Requested', 'Hours Accelerator Down', 'Hours User Off', 'Hours Total'])]
+	totals = {}
+	for report in reports:
+		if not (str(report.author) in totals):
+			totals[str(report.author)] = {'Hours Delivered': 0, 'Hours Requested': 0, 'Hours Accelerator Down': 0, 'Hours User Off': 0, 'Hours Total': 0}
+		totals[str(report.author)]['Hours Delivered'] += report.usefulBeam
+		totals[str(report.author)]['Hours Requested'] += report.requested_time
+		totals[str(report.author)]['Hours Accelerator Down'] += report.unschedAccDown
+		totals[str(report.author)]['Hours User Off'] += report.unschedUserDown
+		totals[str(report.author)]['Hours Total'] += report.totalHours()
+	
+	for report_title, report_totals in totals.iteritems():
+		output_rows.append(','.join([report_title, str(report_totals['Hours Delivered']), str(report_totals['Hours Requested']), str(report_totals['Hours Accelerator Down']), str(report_totals['Hours User Off']), str(report_totals['Hours Total'])]))
+	
+	output_rows.extend(['', 'Shift by shift', ','.join(['Experiment', 'Hours Delivered', 'Hours Requested', 'Hours Accelerator Down', 'Hours User Off', 'Hours Total'])])
+	for report in reports:
+		output_rows.append(','.join([str(report.author), str(report.usefulBeam), str(report.requested_time), str(report.unschedAccDown), str(report.unschedUserDown), str(report.totalHours())]))
+	
+	return '\n'.join(output_rows)
