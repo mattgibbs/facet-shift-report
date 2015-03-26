@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="{{ url_for('static', filename='js/form.js') }}" charset="utf-8"></script>
 <h1>User Shift Report</h1>
 {% include 'flash.html' %}
 <div class="well">
-	<form class="form-horizontal" action="" method="post" name="report" role="form">
+	<form id="shift_report_form" class="form-horizontal" action="" method="post" name="report" role="form">
 		{{form.hidden_tag()}}
 		<div class="form-group{% if form.errors.user %} has-error{% endif %}">
 			<label class="col-sm-2 control-label" for="user">{{form.user.label}}</label>
