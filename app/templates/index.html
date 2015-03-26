@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<script src="{{ url_for('static', filename='js/index.js') }}" charset="utf-8"></script>
 <h1>{{ 'FACET Shift Reports' + (' for ' + user.name if user else '') + (" from {0} to {1}".format(start_date, end_date) if (start_date and end_date) else '') }}</h1>
 {% if admin %}
 <h1>Admin Mode</h1>
@@ -42,7 +43,7 @@
 			</td>
 			{% if admin %}
 				<td class="col-sm-1" style="opacity: 1.0;"><a href="{{ url_for('admin_toggle_report_hidden', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-warning">{{ 'Show' if r.hidden else 'Hide' }}</a></td>
-				<td class="col-sm-1" style="opacity: 1.0;">{% if r.hidden %}<a href="{{ url_for('admin_delete_report', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>{% endif %}</td>
+				<td class="col-sm-1" style="opacity: 1.0;">{% if r.hidden %}<a href="{{ url_for('admin_delete_report', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-danger deletebutton"><span class="glyphicon glyphicon-trash"></span> Delete</a>{% endif %}</td>
 			{% endif %}
 		</tr>
 	{% endfor %}
