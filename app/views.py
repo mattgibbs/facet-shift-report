@@ -159,9 +159,8 @@ def shift_summary_form(reportid = None):
 		report = models.ShiftReport.query.get(reportid)
 		if report:
 			# Fill out form with data from database
-			print report.user
 			form.read_report(report)
-			print form.user.data
+			form.validate()
 		else:
 			# Report ID does not exist
 			flash("Report does not exist")
@@ -207,7 +206,8 @@ def submit_shift_form(reportid = None):
 			flash("Could not submit shift report.")
 			if reportid:
 				return redirect(url_for('shift_summary_form', reportid=reportid))
-			return render_template('shift_report.html', form=form)
+			else:
+				return render_template('shift_report.html', form=form)
 			
 		try:
 			new_entry_url = report.post_to_logbook()
@@ -222,7 +222,12 @@ def submit_shift_form(reportid = None):
 			logmessage = "but could not create FACET entry."
 		flash(dbmessage + logmessage)
 		return redirect('index')
-	return redirect(url_for('shift_summary_form', reportid = reportid))
+		
+	flash("Could not submit shift report, please check the form for errors.")
+	if reportid:
+		return redirect(url_for('shift_summary_form', reportid = reportid))
+	else:
+		return render_template('shift_report.html', form=form)
 
 @app.route('/view_report')
 @app.route('/view_report/')
