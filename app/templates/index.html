@@ -42,7 +42,7 @@
 			</td>
 			{% if admin %}
 				<td class="col-sm-1" style="opacity: 1.0;"><a href="{{ url_for('admin_toggle_report_hidden', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-warning">{{ 'Show' if r.hidden else 'Hide' }}</a></td>
-				<td class="col-sm-1" style="opacity: 1.0;"><a href="{{ url_for('admin_delete_report', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a></td>
+				<td class="col-sm-1" style="opacity: 1.0;">{% if r.hidden %}<a href="{{ url_for('admin_delete_report', reportid=r.id, next=(user.id if user else 'index')) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>{% endif %}</td>
 			{% endif %}
 		</tr>
 	{% endfor %}
