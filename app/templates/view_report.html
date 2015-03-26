@@ -13,9 +13,7 @@
 {% endif %}
 <div class="row">
 	<div class="col-sm-12">
-		<dl class="dl-horizontal">
-		  <dt>Experiment</dt>
-		  <dd>{{ report.author }}</dd>
+			{% include 'report_summary_table.html' %}
 		  <dt>Shift Personnel</dt>
 		  <dd>{{ report.personnel }}</dd>
 		  <dt>Shift Start Time</dt>
@@ -32,32 +30,8 @@
 		  <dd>{{ report.problems|nl2br }}</dd>
 		  <dt>To Do On Next Shift</dt>
 		  <dd>{{ report.nextShift|nl2br }}</dd>
-		  <dt>Brief Summary</dt>
-		  <dd>{{ report.briefSummary|nl2br }}</dd>
 		  <dt>Other Notes</dt>
 		  <dd>{{ report.other|nl2br }}</dd>
-			
-			<dt>Particle Type</dt>
-			<dd>{{ 'Positrons' if report.usesPositrons else 'Electrons' }}</dd>
-			<dt>Bunch Charge</dt>
-			<dd>{{ report.numParticles }}x10<sup>10</sup> particles</dd>
-			<dt>LI20 X Wire Size</dt>
-			<dd>{{ report.x_rms_li20 }} &mu;m</dd>
-			<dt>LI20 Y Wire Size</dt>
-			<dd>{{ report.y_rms_li20 }} &mu;m</dd>
-			<dt>Bunch Length</dt>
-			<dd>{{ report.bunch_length }} &mu;m</dd>
-			
-		  <dt>Requested Beam Time</dt>
-		  <dd>{{ report.requested_time }}</dd>
-		  <dt>Useful Beam Time</dt>
-		  <dd>{{ report.usefulBeam }}</dd>
-		  <dt>Unscheduled Accelerator Downtime</dt>
-		  <dd>{{ report.unschedAccDown }}</dd>
-		  <dt>Unscheduled User Downtime</dt>
-		  <dd>{{ report.unschedUserDown }}</dd>
-		  <dt>Accelerator Physics Available</dt>
-		  <dd>{{ report.physAvail }}</dd>
 			{% if report.hidden or admin %}
 			  <dt>Hidden</dt>
 			  <dd>{{ 'Yes' if report.hidden else 'No' }}</dd>
@@ -72,6 +46,6 @@
 	</div>
 </div>
 
-{% include 'report_summary_table.html' %}
+
 
 {% endblock %}
