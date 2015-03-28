@@ -111,6 +111,9 @@ def summaries():
 		hidden_reports = reports.filter(models.ShiftReport.hidden == True)
 		reports = reports.except_(hidden_reports)
 	
+	if request.args.get('show_unsubmitted') == None or not (request.args.get('show_unsubmitted').lower() == "true"):
+		reports = reports.filter(models.ShiftReport.submitted == True)
+	
 	#Always order the reports by id
 	reports = reports.order_by('shift_report_shiftEnd desc')
 	
