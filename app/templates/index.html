@@ -30,8 +30,8 @@
 	{% for r in reports %}
 		<tr class="{{'hidden-report' if r.hidden else 'report'}}">
 			<td class="col-sm-2"><a href="{{ url_for('admin_view_report' if admin else 'view_report', reportid=r.id) }}">{{r.shiftEnd}}</a></td>
-			<td class="col-sm-1"><a href="{{ url_for('admin_index' if admin else 'index', userid=r.author.id) }}">{{r.author.name}}</a></td>
-      <td class="col-sm-2">{{r.author.experiment_title}}</td>
+			<td class="col-sm-1">{% if r.author %}<a href="{{ url_for('admin_index' if admin else 'index', userid=r.author.id) }}">{{r.author.name}}{% endif %}</a></td>
+      <td class="col-sm-2">{% if r.author %}{{r.author.experiment_title}}{% endif %}</td>
 			<td class="col-sm-3">{{r.briefSummary}}</td>
 			<td class="col-sm-1">
 				{{ "Yes" if r.submitted else "No" }}

@@ -203,7 +203,7 @@ def submit_shift_form(reportid = None):
 			if reportid:
 				return redirect(url_for('shift_summary_form', reportid=reportid))
 			else:
-				return render_template('shift_report.html', form=form)
+				return render_template('shift_report.html', form=form, reportid=None)
 			
 		try:
 			new_entry_url = report.post_to_logbook()
