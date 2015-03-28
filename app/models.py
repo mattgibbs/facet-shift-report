@@ -67,9 +67,10 @@ class ShiftReport(db.Model):
 			self.read_form(form)
 	
 	def totalHours(self):
-		if self.unschedUserDown and self.usefulBeam and self.unschedAccDown:
+		try:
 			return self.unschedUserDown + self.usefulBeam + self.unschedAccDown
-		return None
+		except TypeError:
+			return 0.0
 	
 	def physAvailPercentage(self):
 		if self.totalHours() > 0:
