@@ -75,6 +75,7 @@ def index(userid = None, username = None, admin=False):
 	path, extension = os.path.splitext(request.base_url)
 	print(request.base_url)
 	if extension == ".csv":
+		reports = reports.filter(models.ShiftReport.submitted == True)
 		return Response(generate_csv_for_reports(reports), mimetype='text/csv')
 	return render_template("index.html", reports=reports, user=user, start_date=start_date_str, end_date=end_date_str, admin=admin)
 
