@@ -221,9 +221,9 @@ def submit_shift_form(reportid = None):
 		
 	flash("Could not submit shift report, please check the form for errors.")
 	if reportid:
-		return redirect(url_for('shift_summary_form', reportid = reportid))
+		return redirect(url_for('shift_summary_form', reportid=reportid))
 	else:
-		return render_template('shift_report.html', form=form)
+		return render_template('shift_report.html', form=form, reportid=None)
 
 @app.route('/view_report')
 @app.route('/view_report/')
