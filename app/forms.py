@@ -3,6 +3,7 @@ from wtforms import fields
 from wtforms.validators import Required
 from app import models
 from datetime import datetime
+from selectdatetimewidget import SelectDateTimeWidget
 
 class UserForm(Form):
 	userName		= fields.TextField('Experiment name', validators = [Required()])
@@ -16,9 +17,9 @@ class ShiftForm(Form):
 	personnel		= fields.TextAreaField('Shift Leader/Shift Personnel')
 
 	# USE DATETIME FORMAT OF %Y-%m-%dT%H:%M:%S FOR FILE NAME
-	postTime		= fields.DateTimeField('Time to Post to E-Log', format="%Y-%m-%d %H:%M:%S", validators=[Required()])
-	shiftStart		= fields.DateTimeField('Shift Start Time', format="%Y-%m-%d %H:%M:%S", validators=[Required()])
-	shiftEnd		= fields.DateTimeField('Shift End Time', format="%Y-%m-%d %H:%M:%S", validators=[Required()])
+	postTime		= fields.DateTimeField('Time to Post to E-Log', format="%m %d %Y %H %M %S", validators=[Required(message="Invalid date.")], widget=SelectDateTimeWidget())
+	shiftStart		= fields.DateTimeField('Shift Start Time', format="%m %d %Y %H %M %S", validators=[Required(message="Invalid date.")], widget=SelectDateTimeWidget())
+	shiftEnd		= fields.DateTimeField('Shift End Time', format="%m %d %Y %H %M %S", validators=[Required(message="Invalid date.")], widget=SelectDateTimeWidget())
 
 	goals			= fields.TextAreaField('Goals')
 	progress		= fields.TextAreaField('Progress')
