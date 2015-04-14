@@ -54,9 +54,13 @@ class ShiftReport(db.Model):
 	
 	usesPositrons = db.Column(db.Boolean, default = False)
 	numParticles = db.Column(db.Float)
+	numParticles_sigma = db.Column(db.Float)
 	x_rms_li20 = db.Column(db.Float)
+	x_rms_li20_sigma = db.Column(db.Float)
 	y_rms_li20 = db.Column(db.Float)
+	y_rms_li20_sigma = db.Column(db.Float)
 	bunch_length = db.Column(db.Float)
+	bunch_length_sigma = db.Column(db.Float)
 	
 	hidden = db.Column(db.Boolean())
 	submitted = db.Column(db.Boolean(), default = False)
