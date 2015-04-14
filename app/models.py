@@ -132,10 +132,10 @@ class ShiftReport(db.Model):
 					"__Brief Summary:__\r\n{8}\r\n\r\n" +
 					"__Other Notes:__\r\n{9}\r\n\r\n" +
 					"__Particle Type:__ {15}\r\n" +
-					"__Bunch Charge:__ {16}+/-{20}  x10^10 particles\r\n" +
-					"__LI20 Horizontal Beam Size:__ {17}+/-{21} um\r\n" +
-					"__LI20 Vertical Beam Size:__ {18}+/-{22} um\r\n" +
-					"__Bunch Length:__ {19}+/-{23} um\r\n" +
+					"__Bunch Charge:__ {16}{20}  x10^10 particles\r\n" +
+					"__LI20 Horizontal Beam Size:__ {17}{21} um\r\n" +
+					"__LI20 Vertical Beam Size:__ {18}{22} um\r\n" +
+					"__Bunch Length:__ {19}{23} um\r\n" +
 					"| Useful Beam Time | Accelerator Downtime | User Downtime | Acc Physics Available \r\n" +
 					"| {10} | {11} | {12} | {13} \r\n\r\n" + 
 					"View this report in the FACET Shift Reports system: {14}").format(self.author, self.personnel, self.shiftStart, self.shiftEnd,
@@ -148,10 +148,10 @@ class ShiftReport(db.Model):
 														round(self.x_rms_li20,2) if self.x_rms_li20 else None,
 														round(self.y_rms_li20,2) if self.y_rms_li20 else None,
 														round(self.bunch_length,2) if self.bunch_length else None,
-														round(self.numParticles_sigma,2) if self.numParticles_sigma else None,
-														round(self.x_rms_li20_sigma,2) if self.x_rms_li20_sigma else None,
-														round(self.y_rms_li20_sigma,2) if self.y_rms_li20_sigma else None,
-														round(self.bunch_length_sigma,2) if self.bunch_length_sigma else None)
+														" +/- " + str(round(self.numParticles_sigma,2)) if self.numParticles_sigma else '',
+														" +/- " + str(round(self.x_rms_li20_sigma,2)) if self.x_rms_li20_sigma else '',
+														" +/- " + str(round(self.y_rms_li20_sigma,2)) if self.y_rms_li20_sigma else '',
+														" +/- " + str(round(self.bunch_length_sigma,2)) if self.bunch_length_sigma else '')
 		entry.timestamp = self.postTime
 		success_status = entry.submit("facetelog")
 		return success_status
