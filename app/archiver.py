@@ -17,5 +17,5 @@ def get_mean_and_std(pv, start_time, end_time):
 	std = 0
 	for datapoint in data[0]['data']:
 		std = std + (datapoint['val'] - average)**2
-	std = sqrt(std/count)
+	std = math.sqrt(std/count)
 	return (average, std)
