@@ -108,10 +108,12 @@ class ShiftReport(db.Model):
 		return '<Post by %r>' % (self.user)
   
 	def get_archived_beam_parameters(self):
-		self.numParticles = archiver.get_mean_and_std('LI20:TORO:2040:DATA', self.shiftStart, self.shiftEnd)[0] / 1.0E10
-		self.x_rms_li20 = archiver.get_mean_and_std('WIRE:LI20:3206:XRMS', self.shiftStart, self.shiftEnd)[0]
-		self.y_rms_li20 = archiver.get_mean_and_std('WIRE:LI20:3206:YRMS', self.shiftStart, self.shiftEnd)[0]
-		self.bunch_length = archiver.get_mean_and_std('PROF:LI20:3230:BLEN', self.shiftStart, self.shiftEnd)[0]
+		(self.numParticles, self.numParticles_sigma) = archiver.get_mean_and_std('LI20:TORO:2040:DATA', self.shiftStart, self.shiftEnd)
+		self.numParticles = self.numParticles / 1.0E10
+		self.numParticles_sigma = self.numParticles_sigma / 1.0E10
+		(self.x_rms_li20, self.x_rms_li20_sigma) = archiver.get_mean_and_std('WIRE:LI20:3206:XRMS', self.shiftStart, self.shiftEnd)
+		(self.y_rms_li20, self.y_rms_li20_sigma) = archiver.get_mean_and_std('WIRE:LI20:3206:YRMS', self.shiftStart, self.shiftEnd)
+		(self.bunch_length, self.bunch_length_sigma) = archiver.get_mean_and_std('PROF:LI20:3230:BLEN', self.shiftStart, self.shiftEnd)
 		
 	
 	
@@ -142,7 +144,7 @@ class ShiftReport(db.Model):
 														self.unschedAccDown, self.unschedUserDown, self.physAvail,
 														url_for('view_report', reportid=self.id, _external=True),
 														"Positrons" if self.usesPositrons else "Electrons",
-														self.numParticles, self.x_rms_li20, self.y_rms_li20, self.bunch_length)
+														round(self.numParticles,2), round(self.x_rms_li20,2), round(self.y_rms_li20,2), round(self.bunch_length,2))
 		entry.timestamp = self.postTime
 		success_status = entry.submit("facetelog")
 		return success_status

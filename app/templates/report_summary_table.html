@@ -1,28 +1,104 @@
-<table width="100%" class="ms-rteTable-default" cellspacing="0" style="font-size:1em"><tbody><tr class="ms-rteTableEvenRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="4" style="text-align:left"><div class="ms-rteStyle-Highlight"><strong>Experiment:</strong> {{ report.author }}</div>
-<div class="ms-rteStyle-Highlight"><strong>Shift Start:</strong> {{ report.shiftStart }}</div></td></tr>
-<tr class="ms-rteTableOddRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Requested Beam Time (hours)​:</strong>​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">{{ report.requested_time }}​​</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Charge delivered in S20 (E10 {{'positrons' if report.usesPositrons else 'electrons' }}/bunch):</strong>​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">​{{ report.numParticles }}</td></tr>
-<tr class="ms-rteTableEvenRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>​Useful Beam Time (hours):</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">{{ report.usefulBeam }}​</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Horizontal beam size in S20 (rms, microns):</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">{{ report.x_rms_li20 }}</td></tr>
-<tr class="ms-rteTableOddRow-default" style="text-align:right"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>Unscheduled Accelerator Downtime (hours):​</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px"><strong>​</strong>{{ report.unschedAccDown }}</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>Vertical beam size in S20 (rms, microns):</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">{{ report.y_rms_li20 }}</td></tr>
-<tr class="ms-rteTableEvenRow-default" style="text-align:right"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>​</strong><strong>Unscheduled User Downtime (hours):</strong>​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">​{{ report.unschedUserDown }}​</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>Bunch length (rms, microns)​:</strong>​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">{{ report.bunch_length }}​​</td></tr>
-<tr class="ms-rteTableOddRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>Total delivered+downtime+user off (hours):​</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right"><strong>​</strong>{{ report.totalHours() }} </td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px"><strong>​</strong></td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px"><strong>​</strong></td></tr>
-<tr class="ms-rteTableEvenRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right"><strong>% time accelerator support physicist available:</strong>​​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">{{ report.physAvailPercentage() }}</td>
-<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">​</td>
-<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">​</td></tr>
-<tr class="ms-rteTableOddRow-default"><td class="ms-rteTableEvenCol-default" rowspan="1" colspan="4" style="height:96px;text-align:left">​ <strong>Brief Summary:</strong><ul>
-{{ report.briefSummary|nl2br }}</ul></td></tr></tbody></table>
+<table width="100%" class="ms-rteTable-default" cellspacing="0" style="font-size:1em">
+	<tbody>
+		<tr class="ms-rteTableEvenRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="4" style="text-align:left">
+				<div class="ms-rteStyle-Highlight">
+					<strong>Experiment:</strong> {{ report.author }}
+				</div>
+				<div class="ms-rteStyle-Highlight">
+					<strong>Shift Start:</strong> {{ report.shiftStart }}
+				</div>
+			</td>
+		</tr>
+		<tr class="ms-rteTableOddRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>Requested Beam Time (hours)​:</strong>​
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">
+				{{ report.requested_time }}
+			​​</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>Charge delivered in S20 (E10 {{'positrons' if report.usesPositrons else 'electrons' }}/bunch):</strong>​
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
+				​{% if report.numParticles %}{{ report.numParticles|round(2) }}{% else %}Not Available{% endif %}
+			</td>
+		</tr>
+		<tr class="ms-rteTableEvenRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>​Useful Beam Time (hours):</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">
+				{{ report.usefulBeam }}​
+			</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>Horizontal beam size in S20 (rms, microns):</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
+				{% if report.x_rms_li20 %}{{ report.x_rms_li20|round(2) }}{% else %}Not Available{% endif %}
+			</td>
+		</tr>
+		<tr class="ms-rteTableOddRow-default" style="text-align:right">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">
+				<strong>Unscheduled Accelerator Downtime (hours):​</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">
+				<strong>​</strong>{{ report.unschedAccDown }}
+			</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">
+				<strong>Vertical beam size in S20 (rms, microns):</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
+				{% if report.y_rms_li20 %}{{ report.y_rms_li20|round(2) }}{% else %}Not Available{% endif %}
+			</td>
+		</tr>
+		<tr class="ms-rteTableEvenRow-default" style="text-align:right">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">
+				<strong>​</strong><strong>Unscheduled User Downtime (hours):</strong>​
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">
+				​{{ report.unschedUserDown }}
+			​</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">
+				<strong>Bunch length (rms, microns)​:</strong>​
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
+				{% if report.bunch_length %}{{ report.bunch_length|round(2) }}{% else %}Not Available{% endif %}
+			​​</td>
+		</tr>
+		<tr class="ms-rteTableOddRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>Total delivered+downtime+user off (hours):​</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">
+				<strong>​</strong>{{ report.totalHours() }} 
+			</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">
+				<strong>​</strong>
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">
+				<strong>​</strong>
+			</td>
+		</tr>
+		<tr class="ms-rteTableEvenRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px;text-align:right">
+				<strong>% time accelerator support physicist available:</strong>​
+			​</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:right">
+				{{ report.physAvailPercentage() }}
+			</td>
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="1" style="width:360px">​
+			</td>
+			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px">​
+			</td>
+		</tr>
+		<tr class="ms-rteTableOddRow-default">
+			<td class="ms-rteTableEvenCol-default" rowspan="1" colspan="4" style="height:96px;text-align:left">​
+				<strong>Brief Summary:</strong>
+				<ul>
+					 {{ report.briefSummary|nl2br }}
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
