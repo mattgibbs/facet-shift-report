@@ -24,7 +24,7 @@
 				​{% if report.numParticles %}
 					{{ report.numParticles|round(2) }}
 					{% if report.numParticles_sigma and report.numParticles_sigma > 0 %}
-					 + {{ report.numParticles_sigma|round(2) }}
+					 &plusmn; {{ report.numParticles_sigma|round(2) }}
 					{% endif %}
 				{% else %}
 					Not Available
@@ -45,7 +45,7 @@
 				{% if report.x_rms_li20 %}
 					{{ report.x_rms_li20|round(2) }}
 					{% if report.x_rms_li20_sigma and report.x_rms_li20_sigma > 0 %}
-					 + {{ report.x_rms_li20_sigma|round(2) }}
+					 &plusmn; {{ report.x_rms_li20_sigma|round(2) }}
 					{% endif %}
 				{% else %}
 					Not Available
@@ -66,7 +66,7 @@
 				{% if report.y_rms_li20 %}
 					{{ report.y_rms_li20|round(2) }}
 					{% if report.y_rms_li20_sigma and report.y_rms_li20_sigma > 0 %}
-					 + {{ report.y_rms_li20_sigma|round(2) }}
+					 &plusmn; {{ report.y_rms_li20_sigma|round(2) }}
 					{% endif %}
 				{% else %}
 					Not Available
@@ -87,7 +87,7 @@
 				{% if report.bunch_length %}
 					{{ report.bunch_length|round(2) }}
 					{% if report.bunch_length_sigma and report.bunch_length_sigma > 0 %}
-					 + {{ report.bunch_length_sigma|round(2) }}
+					 &plusmn; {{ report.bunch_length_sigma|round(2) }}
 					{% endif %}
 				{% else %}
 					Not Available
