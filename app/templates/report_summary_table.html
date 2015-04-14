@@ -21,7 +21,14 @@
 				<strong>Charge delivered in S20 (E10 {{'positrons' if report.usesPositrons else 'electrons' }}/bunch):</strong>​
 			</td>
 			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
-				​{% if report.numParticles %}{{ report.numParticles|round(2) }}{% else %}Not Available{% endif %}
+				​{% if report.numParticles %}
+					{{ report.numParticles|round(2) }}
+					{% if report.numParticles_sigma and report.numParticles_sigma > 0 %}
+					 + {{ report.numParticles_sigma|round(2) }}
+					{% endif %}
+				{% else %}
+					Not Available
+				{% endif %}
 			</td>
 		</tr>
 		<tr class="ms-rteTableEvenRow-default">
@@ -35,7 +42,14 @@
 				<strong>Horizontal beam size in S20 (rms, microns):</strong>
 			</td>
 			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
-				{% if report.x_rms_li20 %}{{ report.x_rms_li20|round(2) }}{% else %}Not Available{% endif %}
+				{% if report.x_rms_li20 %}
+					{{ report.x_rms_li20|round(2) }}
+					{% if report.x_rms_li20_sigma and report.x_rms_li20_sigma > 0 %}
+					 + {{ report.x_rms_li20_sigma|round(2) }}
+					{% endif %}
+				{% else %}
+					Not Available
+				{% endif %}
 			</td>
 		</tr>
 		<tr class="ms-rteTableOddRow-default" style="text-align:right">
@@ -49,7 +63,14 @@
 				<strong>Vertical beam size in S20 (rms, microns):</strong>
 			</td>
 			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
-				{% if report.y_rms_li20 %}{{ report.y_rms_li20|round(2) }}{% else %}Not Available{% endif %}
+				{% if report.y_rms_li20 %}
+					{{ report.y_rms_li20|round(2) }}
+					{% if report.y_rms_li20_sigma and report.y_rms_li20_sigma > 0 %}
+					 + {{ report.y_rms_li20_sigma|round(2) }}
+					{% endif %}
+				{% else %}
+					Not Available
+				{% endif %}
 			</td>
 		</tr>
 		<tr class="ms-rteTableEvenRow-default" style="text-align:right">
@@ -63,7 +84,14 @@
 				<strong>Bunch length (rms, microns)​:</strong>​
 			</td>
 			<td class="ms-rteTableOddCol-default" rowspan="1" colspan="1" style="width:35px;text-align:center">
-				{% if report.bunch_length %}{{ report.bunch_length|round(2) }}{% else %}Not Available{% endif %}
+				{% if report.bunch_length %}
+					{{ report.bunch_length|round(2) }}
+					{% if report.bunch_length_sigma and report.bunch_length_sigma > 0 %}
+					 + {{ report.bunch_length_sigma|round(2) }}
+					{% endif %}
+				{% else %}
+					Not Available
+				{% endif %}
 			​​</td>
 		</tr>
 		<tr class="ms-rteTableOddRow-default">
