@@ -208,6 +208,12 @@ def submit_shift_form(reportid = None):
 				return redirect(url_for('shift_summary_form', reportid=reportid))
 			else:
 				return render_template('shift_report.html', form=form, reportid=None)
+				
+		try:
+			report.get_archived_beam_parameters()
+			db.session.commit()
+		except:
+			print("Couldn't fetch beam parameters.")
 			
 		try:
 			new_entry_url = report.post_to_logbook()

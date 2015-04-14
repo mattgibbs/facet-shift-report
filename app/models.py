@@ -1,6 +1,7 @@
 from app import db
 from flask import url_for
 import physicslog
+import archiver
 import time
 
 ROLE_USER = 0
@@ -101,7 +102,15 @@ class ShiftReport(db.Model):
 		self.requested_time = form.data['requested_time']
 	def __repr__(self):
 		return '<Post by %r>' % (self.user)
-        
+  
+	def get_archived_beam_parameters(self):
+		self.numParticles = archiver.get_mean_and_std('LI20:TORO:2040:DATA', self.shiftStart, self.shiftEnd)[0] / 1.0E10
+		self.x_rms_li20 = archiver.get_mean_and_std('WIRE:LI20:3206:XRMS', self.shiftStart, self.shiftEnd)[0]
+		self.y_rms_li20 = archiver.get_mean_and_std('WIRE:LI20:3206:YRMS', self.shiftStart, self.shiftEnd)[0]
+		self.bunch_length = archiver.get_mean_and_std('PROF:LI20:3230:BLEN', self.shiftStart, self.shiftEnd)[0]
+		
+	
+	
 	def post_to_logbook(self):
 		entry = physicslog.Entry()
 		entry.title = "FACET User Summary for {0} to {1}".format(self.shiftStart.strftime("%Y-%m-%d %H:%M"), self.shiftEnd.strftime("%Y-%m-%d %H:%M"))
