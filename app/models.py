@@ -79,7 +79,7 @@ class ShiftReport(db.Model):
 	
 	def physAvailPercentage(self):
 		if self.totalHours() > 0:
-			return self.physAvail / self.totalHours()
+			return "{0}%".format(int((self.physAvail / self.totalHours()) * 100))
 		return "Not Available"
 
 	def read_form(self, form):
