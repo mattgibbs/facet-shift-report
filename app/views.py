@@ -224,7 +224,8 @@ def submit_shift_form(reportid = None):
 				logmessage = "and FACET E-Log entry created."
 			else:
 				logmessage = "but could not create FACET entry."
-		except (HTTPError, ConnectionError):
+		except (HTTPError, ConnectionError), e:
+			print(e)
 			logmessage = "but could not create FACET entry."
 		flash(dbmessage + logmessage)
 		return redirect('index')
