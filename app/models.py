@@ -119,9 +119,9 @@ class ShiftReport(db.Model):
 	
 	def post_to_logbook(self):
 		entry = physicslog.Entry()
-		entry.title = "FACET User Summary for {0} to {1}".format(self.shiftStart.strftime("%Y-%m-%d %H:%M"), self.shiftEnd.strftime("%Y-%m-%d %H:%M"))
-		entry.author = self.author.name
-		entry.text = ("__Experiment:__ {0} \r\n" + 
+		entry.title = unicode("FACET User Summary for {0} to {1}").format(self.shiftStart.strftime("%Y-%m-%d %H:%M"), self.shiftEnd.strftime("%Y-%m-%d %H:%M"))
+		entry.author = unicode(self.author.name)
+		entry.text = unicode("__Experiment:__ {0} \r\n" + 
 					"__Personnel:__ {1} \r\n" +
 					"__Shift Start:__ {2} \r\n" +
 					"__Shift End:__ {3} \r\n\r\n" +
