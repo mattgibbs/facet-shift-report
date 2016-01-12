@@ -33,7 +33,7 @@ class Entry:
 	
 	def creation_url(self, logname, timestamp):
 		year = timestamp.strftime('%Y')
-		week = str(int(timestamp.strftime('%W'))+1).zfill(2)
+		week = str(timestamp.isocalendar()[1]).zfill(2)
 		month = timestamp.strftime('%m')
 		day = timestamp.strftime('%d')
 		base_url = "http://physics-elog.slac.stanford.edu/elog/FileEdit?file=/{0}/data/{1}/{2}/{3}.{4}&xsl=/elogbook/xsl/elog-fileform.xsl&mode=create"
