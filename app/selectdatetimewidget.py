@@ -38,7 +38,7 @@ class SelectDateTimeWidget(object):
 				if field.data:
 					current_value = int(field.data.strftime(format))
 				else:
-					current_value = None
+					current_value = int(datetime.now().strftime(format))
 				for value, label in choices:
 					selected = (value == current_value)
 					html.append(Select.render_option(value, label, selected))
